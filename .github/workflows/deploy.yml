@@ -1,0 +1,31 @@
+name: Desplegar en Azure App Service
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Configurar PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mbstring, pdo, pdo_mysql, xml, curl, zip
+          coverage: none
+
+      - name: Instalar dependencias de Composer
+        run: composer install --no-dev --optimize-autoloader --no-interaction
+
+      - name: Desplegar en Azure Web App
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: superpatasycolas
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          package: .
