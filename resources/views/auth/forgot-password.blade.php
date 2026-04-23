@@ -7,14 +7,6 @@
     <div class="container">
         <div class="spyc-auth-card">
 
-            <div class="spyc-auth-brand">
-                <img src="{{ asset('images/logo.png') }}" alt="Super Patas y Colas" width="52" height="52">
-                <div class="spyc-auth-brand-text">
-                    Super Patas y Colas
-                    <small>Albergue · SMP, Lima</small>
-                </div>
-            </div>
-
             <h1 class="spyc-auth-title">Restablecer contraseña</h1>
             <p class="spyc-auth-subtitle">Ingresa tu correo electrónico y te enviaremos un enlace para restablecer tu contraseña.</p>
 

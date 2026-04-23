@@ -7,14 +7,6 @@
     <div class="container">
         <div class="spyc-auth-card is-wide">
 
-            <div class="spyc-auth-brand">
-                <img src="{{ asset('images/logo.png') }}" alt="Super Patas y Colas" width="52" height="52">
-                <div class="spyc-auth-brand-text">
-                    Super Patas y Colas
-                    <small>Albergue · SMP, Lima</small>
-                </div>
-            </div>
-
             <h1 class="spyc-auth-title">Crear cuenta</h1>
             <p class="spyc-auth-subtitle">Únete a nuestra comunidad de amantes de los animales</p>
 
