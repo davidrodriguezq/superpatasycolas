@@ -79,7 +79,7 @@
 
             @role('admin')
                 <div class="admin-nav-group-label">Administración</div>
-                <a href="{{ url('/admin/usuarios') }}"
+                <a href="{{ route('admin.users.index') }}"
                    class="admin-nav-item {{ request()->routeIs('admin.users.*') ? 'active' : '' }}">
                     <i class="bi bi-people"></i> Usuarios
                 </a>
@@ -112,8 +112,7 @@
                     <i class="bi bi-chevron-down"></i>
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end">
-                    {{-- ruta real: route('profile') — se activa en F1-T06 --}}
-                    <li><a class="dropdown-item" href="{{ url('/perfil') }}">Mi perfil</a></li>
+                    <li><a class="dropdown-item" href="{{ route('profile.show') }}">Mi perfil</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li>
                         <form method="POST" action="{{ route('logout') }}">

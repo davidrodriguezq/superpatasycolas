@@ -63,8 +63,7 @@
                                 {{ auth()->user()->name }}
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end">
-                                {{-- rutas reales activadas en F1-T06 y F2-T08 --}}
-                                <li><a class="dropdown-item" href="{{ url('/perfil') }}">Mi perfil</a></li>
+                                <li><a class="dropdown-item" href="{{ route('profile.show') }}">Mi perfil</a></li>
                                 <li><a class="dropdown-item" href="{{ url('/mis-solicitudes') }}">Mis solicitudes</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li>
