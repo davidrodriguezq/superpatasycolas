@@ -3,82 +3,116 @@
 @section('title', 'Iniciar sesión — Super Patas y Colas')
 
 @section('content')
-<div class="container py-5">
-    <div class="row justify-content-center">
-        <div class="col-sm-10 col-md-7 col-lg-5">
-            <div class="card border-0 shadow-sm rounded-4">
-                <div class="card-body p-4 p-md-5">
+<section class="spyc-auth-wrap">
+    <div class="container">
+        <div class="spyc-auth-card">
 
-                    <div class="text-center mb-4">
-                        <img src="{{ asset('images/logo.png') }}" alt="Super Patas y Colas" height="56" class="mb-3">
-                        <h4 class="fw-bold mb-0">Iniciar sesión</h4>
-                        <p class="text-muted small">Bienvenido de vuelta</p>
-                    </div>
-
-                    @if (session('status'))
-                        <div class="alert alert-success">{{ session('status') }}</div>
-                    @endif
-
-                    <form method="POST" action="{{ route('login') }}" novalidate>
-                        @csrf
-
-                        <div class="mb-3">
-                            <label for="email" class="form-label fw-semibold">Correo electrónico</label>
-                            <input
-                                type="email"
-                                id="email"
-                                name="email"
-                                value="{{ old('email') }}"
-                                class="form-control @error('email') is-invalid @enderror"
-                                placeholder="correo@ejemplo.com"
-                                autocomplete="username"
-                                autofocus
-                                required
-                            >
-                            @error('email')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-                        <div class="mb-3">
-                            <div class="d-flex justify-content-between align-items-center mb-1">
-                                <label for="password" class="form-label fw-semibold mb-0">Contraseña</label>
-                                @if (Route::has('password.request'))
-                                    <a href="{{ route('password.request') }}" class="small text-decoration-none">
-                                        ¿Olvidaste tu contraseña?
-                                    </a>
-                                @endif
-                            </div>
-                            <input
-                                type="password"
-                                id="password"
-                                name="password"
-                                class="form-control @error('password') is-invalid @enderror"
-                                autocomplete="current-password"
-                                required
-                            >
-                            @error('password')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-                        <div class="mb-4 form-check">
-                            <input type="checkbox" id="remember_me" name="remember" class="form-check-input">
-                            <label for="remember_me" class="form-check-label">Recuérdame</label>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary w-100">Ingresar</button>
-                    </form>
-
-                    <hr class="my-4">
-
-                    <p class="text-center text-muted mb-0">
-                        ¿No tienes cuenta?
-                        <a href="{{ route('register') }}" class="text-decoration-none fw-semibold">Regístrate</a>
-                    </p>
+            <div class="spyc-auth-brand">
+                <img src="{{ asset('images/logo.png') }}" alt="Super Patas y Colas" width="52" height="52">
+                <div class="spyc-auth-brand-text">
+                    Super Patas y Colas
+                    <small>Albergue · SMP, Lima</small>
                 </div>
             </div>
+
+            <h1 class="spyc-auth-title">Iniciar sesión</h1>
+            <p class="spyc-auth-subtitle">Ingresa a tu cuenta para continuar</p>
+
+            @if (session('status'))
+                <div class="alert alert-success d-flex align-items-start gap-2 mb-3">
+                    <i class="bi bi-check-circle-fill mt-1"></i>
+                    <div>{{ session('status') }}</div>
+                </div>
+            @endif
+
+            <form method="POST" action="{{ route('login') }}" novalidate>
+                @csrf
+
+                <div class="mb-3">
+                    <label for="email" class="form-label">Correo electrónico</label>
+                    <div class="input-group has-validation">
+                        <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                        <input
+                            id="email"
+                            name="email"
+                            type="email"
+                            class="form-control @error('email') is-invalid @enderror"
+                            value="{{ old('email') }}"
+                            placeholder="tu@correo.com"
+                            autocomplete="username"
+                            autofocus
+                            required
+                        >
+                        @error('email')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="password" class="form-label">Contraseña</label>
+                    <div class="input-group has-validation">
+                        <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                        <input
+                            id="password"
+                            name="password"
+                            type="password"
+                            class="form-control @error('password') is-invalid @enderror"
+                            placeholder="••••••••"
+                            autocomplete="current-password"
+                            required
+                        >
+                        <button type="button" class="btn-password-toggle" aria-label="Mostrar contraseña">
+                            <i class="bi bi-eye"></i>
+                        </button>
+                        @error('password')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="d-flex align-items-center justify-content-between mb-4 flex-wrap gap-2">
+                    <div class="form-check mb-0">
+                        <input class="form-check-input" type="checkbox" id="remember" name="remember">
+                        <label class="form-check-label" for="remember" style="font-size:.9rem; color:#4a4138;">Recordarme</label>
+                    </div>
+                    @if (Route::has('password.request'))
+                        <a href="{{ route('password.request') }}" style="font-size:.9rem; font-weight:500;">¿Olvidaste tu contraseña?</a>
+                    @endif
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100">
+                    <i class="bi bi-box-arrow-in-right me-1"></i> Iniciar sesión
+                </button>
+
+                <div class="spyc-auth-sep">o</div>
+
+                <div class="spyc-auth-switch">
+                    ¿No tienes cuenta? <a href="{{ route('register') }}">Regístrate aquí</a>
+                </div>
+            </form>
+
         </div>
     </div>
-</div>
+</section>
 @endsection
+
+@push('scripts')
+<script>
+document.addEventListener('click', function (e) {
+    const btn = e.target.closest('.btn-password-toggle');
+    if (!btn) return;
+    const ig = btn.closest('.input-group');
+    if (!ig) return;
+    const inp = ig.querySelector('input');
+    if (!inp) return;
+    const showing = inp.type === 'text';
+    inp.type = showing ? 'password' : 'text';
+    const icon = btn.querySelector('i');
+    if (icon) {
+        icon.classList.toggle('bi-eye', showing);
+        icon.classList.toggle('bi-eye-slash', !showing);
+    }
+});
+</script>
+@endpush
