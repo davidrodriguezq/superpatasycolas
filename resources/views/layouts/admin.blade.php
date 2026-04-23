@@ -20,8 +20,7 @@
         </div>
 
         <nav class="admin-nav">
-            {{-- rutas reales del panel admin — se activan en F1-T04 --}}
-            <a href="{{ url('/admin') }}"
+            <a href="{{ route('admin.dashboard') }}"
                class="admin-nav-item {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
                 <i class="bi bi-speedometer2"></i> Dashboard
             </a>
@@ -117,8 +116,7 @@
                     <li><a class="dropdown-item" href="{{ url('/perfil') }}">Mi perfil</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li>
-                        {{-- ruta real: route('logout') — se activa en F1-T02 --}}
-                        <form method="POST" action="{{ url('/logout') }}">
+                        <form method="POST" action="{{ route('logout') }}">
                             @csrf
                             <button type="submit" class="dropdown-item">Cerrar sesión</button>
                         </form>

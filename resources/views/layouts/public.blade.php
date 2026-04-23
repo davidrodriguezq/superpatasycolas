@@ -53,9 +53,8 @@
 
                 <div class="d-flex gap-2 mt-3 mt-lg-0">
                     @guest
-                        {{-- rutas reales: route('login') y route('register') — se activan en F1-T02 / F1-T01 --}}
-                        <a href="{{ url('/login') }}" class="btn btn-outline-primary btn-sm px-3">Iniciar sesión</a>
-                        <a href="{{ url('/register') }}" class="btn btn-primary btn-sm px-3">Registrarse</a>
+                        <a href="{{ route('login') }}" class="btn btn-outline-primary btn-sm px-3">Iniciar sesión</a>
+                        <a href="{{ route('register') }}" class="btn btn-primary btn-sm px-3">Registrarse</a>
                     @endguest
                     @auth
                         <div class="dropdown">
@@ -69,8 +68,7 @@
                                 <li><a class="dropdown-item" href="{{ url('/mis-solicitudes') }}">Mis solicitudes</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li>
-                                    {{-- ruta real: route('logout') — se activa en F1-T02 --}}
-                                    <form method="POST" action="{{ url('/logout') }}">
+                                    <form method="POST" action="{{ route('logout') }}">
                                         @csrf
                                         <button type="submit" class="dropdown-item">Cerrar sesión</button>
                                     </form>
