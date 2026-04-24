@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Public\AdoptionController;
+use App\Http\Controllers\Public\CessionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,6 +38,13 @@ Route::middleware(['auth', 'role:adopter'])->group(function () {
     Route::get('/adopcion/{animal}/solicitar', [AdoptionController::class, 'create'])->name('adoption.create');
     Route::post('/adopcion/{animal}/solicitar', [AdoptionController::class, 'store'])->name('adoption.store');
     Route::get('/mis-solicitudes', [AdoptionController::class, 'myRequests'])->name('adoption.my-requests');
+});
+
+// Fase 2: cesión de animales — F2-T11
+Route::middleware(['auth', 'role:surrenderer'])->group(function () {
+    Route::get('/cesion/solicitar', [CessionController::class, 'create'])->name('cession.create');
+    Route::post('/cesion/solicitar', [CessionController::class, 'store'])->name('cession.store');
+    Route::get('/mis-cesiones', [CessionController::class, 'myRequests'])->name('cession.my-requests');
 });
 
 require __DIR__.'/auth.php';

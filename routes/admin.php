@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdoptionRequestController;
 use App\Http\Controllers\Admin\AnimalController;
+use App\Http\Controllers\Admin\CessionRequestController;
 use App\Http\Controllers\Admin\MedicalRecordController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
@@ -35,8 +36,12 @@ Route::resource('adoption-requests', AdoptionRequestController::class)
 Route::patch('adoption-requests/{adoptionRequest}/approve', [AdoptionRequestController::class, 'approve'])->name('adoption-requests.approve');
 Route::patch('adoption-requests/{adoptionRequest}/reject', [AdoptionRequestController::class, 'reject'])->name('adoption-requests.reject');
 
-// Fase 2: cesiones — F2-T12
-// Route::resource('/cesiones', Admin\CessionRequestController::class)->names('cessions');
+// Fase 2: cesiones — F2-T12, F2-T13
+Route::resource('cession-requests', CessionRequestController::class)
+    ->only(['index', 'show'])
+    ->parameters(['cession-requests' => 'cessionRequest']);
+Route::patch('cession-requests/{cessionRequest}/accept', [CessionRequestController::class, 'accept'])->name('cession-requests.accept');
+Route::patch('cession-requests/{cessionRequest}/reject', [CessionRequestController::class, 'reject'])->name('cession-requests.reject');
 
 // Fase 2: seguimientos — F2-T16
 // Route::resource('/seguimiento', Admin\PostAdoptionFollowupController::class)->names('followups');

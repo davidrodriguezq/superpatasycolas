@@ -67,6 +67,9 @@
                                 @role('adopter')
                                     <li><a class="dropdown-item" href="{{ route('adoption.my-requests') }}">Mis solicitudes</a></li>
                                 @endrole
+                                @role('surrenderer')
+                                    <li><a class="dropdown-item" href="{{ route('cession.my-requests') }}">Mis cesiones</a></li>
+                                @endrole
                                 <li><hr class="dropdown-divider"></li>
                                 <li>
                                     <form method="POST" action="{{ route('logout') }}">

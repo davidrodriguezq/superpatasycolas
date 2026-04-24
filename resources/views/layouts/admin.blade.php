@@ -51,10 +51,17 @@
                        class="{{ request()->routeIs('admin.adoption-requests.*') ? 'active' : '' }}">Solicitudes</a></li>
             </ul>
 
-            <a href="{{ url('/admin/cesiones') }}"
-               class="admin-nav-item {{ request()->routeIs('admin.cessions.*') ? 'active' : '' }}">
+            <a href="#subCessions" data-bs-toggle="collapse" role="button"
+               class="admin-nav-item {{ request()->routeIs('admin.cession-requests.*') ? 'active' : '' }}"
+               aria-expanded="{{ request()->routeIs('admin.cession-requests.*') ? 'true' : 'false' }}">
                 <i class="bi bi-box-arrow-in-right"></i> Cesiones
+                <i class="bi bi-chevron-right chev"></i>
             </a>
+            <ul class="admin-nav-sub collapse {{ request()->routeIs('admin.cession-requests.*') ? 'show' : '' }}"
+                id="subCessions">
+                <li><a href="{{ route('admin.cession-requests.index') }}"
+                       class="{{ request()->routeIs('admin.cession-requests.*') ? 'active' : '' }}">Solicitudes</a></li>
+            </ul>
 
             <a href="#subFollowup" data-bs-toggle="collapse" role="button"
                class="admin-nav-item {{ request()->routeIs('admin.followups.*') ? 'active' : '' }}"
