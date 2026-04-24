@@ -40,17 +40,15 @@
             </ul>
 
             <a href="#subAdoptions" data-bs-toggle="collapse" role="button"
-               class="admin-nav-item {{ request()->routeIs('admin.adoptions.*') ? 'active' : '' }}"
-               aria-expanded="{{ request()->routeIs('admin.adoptions.*') ? 'true' : 'false' }}">
+               class="admin-nav-item {{ request()->routeIs('admin.adoption-requests.*') ? 'active' : '' }}"
+               aria-expanded="{{ request()->routeIs('admin.adoption-requests.*') ? 'true' : 'false' }}">
                 <i class="bi bi-house-heart"></i> Adopciones
                 <i class="bi bi-chevron-right chev"></i>
             </a>
-            <ul class="admin-nav-sub collapse {{ request()->routeIs('admin.adoptions.*') ? 'show' : '' }}"
+            <ul class="admin-nav-sub collapse {{ request()->routeIs('admin.adoption-requests.*') ? 'show' : '' }}"
                 id="subAdoptions">
-                <li><a href="{{ url('/admin/adopciones') }}"
-                       class="{{ request()->routeIs('admin.adoptions.index') ? 'active' : '' }}">Solicitudes</a></li>
-                <li><a href="{{ url('/admin/adopciones/historial') }}"
-                       class="{{ request()->routeIs('admin.adoptions.history') ? 'active' : '' }}">Historial</a></li>
+                <li><a href="{{ route('admin.adoption-requests.index') }}"
+                       class="{{ request()->routeIs('admin.adoption-requests.*') ? 'active' : '' }}">Solicitudes</a></li>
             </ul>
 
             <a href="{{ url('/admin/cesiones') }}"

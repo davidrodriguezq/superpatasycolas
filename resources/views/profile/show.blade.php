@@ -75,7 +75,7 @@
                     </div>
                 @else
                     <div class="list-group list-group-flush">
-                        @foreach ($user->adoptionRequests as $request)
+                        @foreach ($user->adoptionRequests->take(3) as $request)
                             <div class="list-group-item px-0 py-3 border-0 border-bottom">
                                 <div class="d-flex justify-content-between align-items-start">
                                     <div>
@@ -88,19 +88,15 @@
                                             {{ $request->created_at->format('d/m/Y') }}
                                         </div>
                                     </div>
-                                    @php $status = $request->status @endphp
-                                    @if ($status->value === 'pending')
-                                        <span class="badge bg-warning text-dark">{{ $status->label() }}</span>
-                                    @elseif ($status->value === 'approved')
-                                        <span class="badge bg-success">{{ $status->label() }}</span>
-                                    @elseif ($status->value === 'rejected')
-                                        <span class="badge bg-danger">{{ $status->label() }}</span>
-                                    @else
-                                        <span class="badge bg-secondary">{{ $status->label() }}</span>
-                                    @endif
+                                    <span class="badge {{ $request->status_badge_class }}">{{ $request->status_label }}</span>
                                 </div>
                             </div>
                         @endforeach
+                    </div>
+                    <div class="text-end mt-3">
+                        <a href="{{ route('adoption.my-requests') }}" class="btn btn-sm btn-outline-primary">
+                            Ver todas mis solicitudes <i class="bi bi-arrow-right ms-1"></i>
+                        </a>
                     </div>
                 @endif
 

@@ -64,7 +64,9 @@
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li><a class="dropdown-item" href="{{ route('profile.show') }}">Mi perfil</a></li>
-                                <li><a class="dropdown-item" href="{{ url('/mis-solicitudes') }}">Mis solicitudes</a></li>
+                                @role('adopter')
+                                    <li><a class="dropdown-item" href="{{ route('adoption.my-requests') }}">Mis solicitudes</a></li>
+                                @endrole
                                 <li><hr class="dropdown-divider"></li>
                                 <li>
                                     <form method="POST" action="{{ route('logout') }}">

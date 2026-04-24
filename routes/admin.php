@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdoptionRequestController;
 use App\Http\Controllers\Admin\AnimalController;
 use App\Http\Controllers\Admin\MedicalRecordController;
 use App\Http\Controllers\Admin\UserController;
@@ -27,8 +28,12 @@ Route::patch('animals/{animal}/photos/{photo}/set-primary', [AnimalController::c
 Route::post('animals/{animal}/medical-records', [MedicalRecordController::class, 'store'])->name('animals.medical-records.store');
 Route::delete('animals/{animal}/medical-records/{medicalRecord}', [MedicalRecordController::class, 'destroy'])->name('animals.medical-records.destroy');
 
-// Fase 2: adopciones — F2-T05
-// Route::resource('/adopciones', Admin\AdoptionRequestController::class)->names('adoptions');
+// Fase 2: adopciones — F2-T05, F2-T06
+Route::resource('adoption-requests', AdoptionRequestController::class)
+    ->only(['index', 'show'])
+    ->parameters(['adoption-requests' => 'adoptionRequest']);
+Route::patch('adoption-requests/{adoptionRequest}/approve', [AdoptionRequestController::class, 'approve'])->name('adoption-requests.approve');
+Route::patch('adoption-requests/{adoptionRequest}/reject', [AdoptionRequestController::class, 'reject'])->name('adoption-requests.reject');
 
 // Fase 2: cesiones — F2-T12
 // Route::resource('/cesiones', Admin\CessionRequestController::class)->names('cessions');
