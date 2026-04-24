@@ -33,9 +33,9 @@
             </a>
             <ul class="admin-nav-sub collapse {{ request()->routeIs('admin.animals.*') ? 'show' : '' }}"
                 id="subAnimals">
-                <li><a href="{{ url('/admin/animales') }}"
+                <li><a href="{{ route('admin.animals.index') }}"
                        class="{{ request()->routeIs('admin.animals.index') ? 'active' : '' }}">Listado</a></li>
-                <li><a href="{{ url('/admin/animales/nuevo') }}"
+                <li><a href="{{ route('admin.animals.create') }}"
                        class="{{ request()->routeIs('admin.animals.create') ? 'active' : '' }}">Registrar nuevo</a></li>
             </ul>
 

@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Enums\AnimalCondition;
 use App\Enums\AnimalSpecies;
 use App\Enums\AnimalStatus;
 use App\Enums\EntryType;
@@ -77,5 +76,72 @@ class Animal extends Model
     public function scopeByStatus(Builder $query, AnimalStatus $status): Builder
     {
         return $query->where('status', $status->value);
+    }
+
+    public function scopeBySex(Builder $query, string $sex): Builder
+    {
+        return $query->where('sex', $sex);
+    }
+
+    public function scopeByEntryType(Builder $query, EntryType $type): Builder
+    {
+        return $query->where('entry_type', $type->value);
+    }
+
+    public function scopeSearch(Builder $query, ?string $search): Builder
+    {
+        if (! $search) {
+            return $query;
+        }
+
+        return $query->where(function (Builder $q) use ($search) {
+            $q->where('name', 'like', "%{$search}%")
+              ->orWhere('breed', 'like', "%{$search}%");
+        });
+    }
+
+    public function getPrimaryPhotoAttribute(): ?AnimalPhoto
+    {
+        return $this->photos->firstWhere('is_primary', true) ?? $this->photos->first();
+    }
+
+    public function getAgeFormattedAttribute(): string
+    {
+        $age = $this->approximate_age;
+
+        if ($age === null || $age === '') {
+            return '—';
+        }
+
+        return is_numeric($age) ? "{$age} años" : $age;
+    }
+
+    /**
+     * Estados a los que el animal puede transicionar desde su estado actual.
+     *
+     * @return array<int, AnimalStatus>
+     */
+    public function allowedStatusTransitions(): array
+    {
+        return match ($this->status) {
+            AnimalStatus::Available  => [AnimalStatus::Available, AnimalStatus::InProcess, AnimalStatus::Quarantine, AnimalStatus::Deceased],
+            AnimalStatus::InProcess  => [AnimalStatus::InProcess, AnimalStatus::Available, AnimalStatus::Adopted],
+            AnimalStatus::Quarantine => [AnimalStatus::Quarantine, AnimalStatus::Available, AnimalStatus::Deceased],
+            AnimalStatus::Adopted    => [AnimalStatus::Adopted, AnimalStatus::Available],
+            AnimalStatus::Deceased   => [AnimalStatus::Deceased],
+            default                  => [$this->status],
+        };
+    }
+
+    public function canTransitionTo(AnimalStatus $newStatus): bool
+    {
+        return in_array($newStatus, $this->allowedStatusTransitions(), true);
+    }
+
+    public function hasActiveAdoptionRequests(): bool
+    {
+        return $this->adoptionRequests()
+            ->whereIn('status', ['pending', 'approved'])
+            ->exists();
     }
 }
