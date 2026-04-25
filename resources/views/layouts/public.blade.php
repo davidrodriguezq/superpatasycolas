@@ -31,23 +31,23 @@
                 <ul class="navbar-nav mx-lg-auto">
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}"
-                           href="{{ url('/') }}">Inicio</a>
+                           href="{{ route('home') }}">Inicio</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('catalog.*') ? 'active' : '' }}"
-                           href="{{ url('/catalogo') }}">Catálogo</a>
+                           href="{{ route('catalog.index') }}">Catálogo</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('about') ? 'active' : '' }}"
-                           href="{{ url('/sobre-nosotros') }}">Sobre nosotros</a>
+                           href="{{ route('about') }}">Sobre nosotros</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('blog.*') ? 'active' : '' }}"
-                           href="{{ url('/blog') }}">Blog</a>
+                        {{-- Blog: se implementa en Bloque I (F3-T06) --}}
+                        <a class="nav-link" href="{{ url('#') }}">Blog</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('contact') ? 'active' : '' }}"
-                           href="{{ url('/contacto') }}">Contacto</a>
+                           href="{{ route('contact') }}">Contacto</a>
                     </li>
                 </ul>
 
@@ -106,11 +106,11 @@
                 </div>
                 <div class="col-6 col-md-3">
                     <h6>Enlaces rápidos</h6>
-                    <a href="{{ url('/') }}">Inicio</a>
-                    <a href="{{ url('/catalogo') }}">Catálogo</a>
-                    <a href="{{ url('/sobre-nosotros') }}">Sobre nosotros</a>
-                    <a href="{{ url('/blog') }}">Blog</a>
-                    <a href="{{ url('/contacto') }}">Contacto</a>
+                    <a href="{{ route('home') }}">Inicio</a>
+                    <a href="{{ route('catalog.index') }}">Catálogo</a>
+                    <a href="{{ route('about') }}">Sobre nosotros</a>
+                    <a href="{{ url('#') }}">Blog</a>
+                    <a href="{{ route('contact') }}">Contacto</a>
                 </div>
                 <div class="col-6 col-md-5">
                     <h6>Contáctanos</h6>

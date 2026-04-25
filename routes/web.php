@@ -2,7 +2,10 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Public\AdoptionController;
+use App\Http\Controllers\Public\CatalogController;
 use App\Http\Controllers\Public\CessionController;
+use App\Http\Controllers\Public\HomeController;
+use App\Http\Controllers\Public\PageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,15 +19,15 @@ use Illuminate\Support\Facades\Route;
  * Las rutas del panel administrativo están en routes/admin.php (prefijo /admin)
  */
 
-Route::get('/', fn () => view('welcome'))->name('home');
+// Portal público — accesible para todos
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
-// Rutas temporales de verificación de layouts (F0-T08).
-// Eliminar cuando existan las vistas reales en Fase 1 y Fase 3.
-Route::get('/test-layout', fn () => view('test-public'));
-Route::get('/test-admin', fn () => view('test-admin'))->middleware('auth');
+Route::get('/catalogo', [CatalogController::class, 'index'])->name('catalog.index');
+Route::get('/catalogo/{animal}', [CatalogController::class, 'show'])->name('catalog.show');
 
-// Catálogo público — placeholder hasta Fase 3 (F3-T02)
-Route::get('/catalogo', fn () => redirect('/') )->name('catalog.index');
+Route::get('/sobre-nosotros', [PageController::class, 'about'])->name('about');
+Route::get('/contacto', [PageController::class, 'contact'])->name('contact');
+Route::post('/contacto', [PageController::class, 'sendContact'])->name('contact.send');
 
 // Fase 1: perfil de usuario — F1-T06
 Route::middleware('auth')->group(function () {
