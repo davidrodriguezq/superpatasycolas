@@ -3,8 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="@yield('meta-description', 'Albergue Super Patas y Colas — adopción responsable de perros y gatos rescatados en San Martín de Porres, Lima.')">
+    <meta name="description" content="@yield('meta-description', 'Super Patas y Colas — Albergue de animales en San Martín de Porres, Lima. Adopción responsable de perros y gatos.')">
     <title>@yield('title', 'Super Patas y Colas')</title>
+
+    {{-- Open Graph --}}
+    <meta property="og:title" content="@yield('title', 'Super Patas y Colas')">
+    <meta property="og:description" content="@yield('meta-description', 'Albergue de animales en San Martín de Porres, Lima.')">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="es_PE">
+    <meta property="og:site_name" content="Super Patas y Colas">
+    @stack('og-image')
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
@@ -42,8 +50,8 @@
                            href="{{ route('about') }}">Sobre nosotros</a>
                     </li>
                     <li class="nav-item">
-                        {{-- Blog: se implementa en Bloque I (F3-T06) --}}
-                        <a class="nav-link" href="{{ url('#') }}">Blog</a>
+                        <a class="nav-link {{ request()->routeIs('blog.*') ? 'active' : '' }}"
+                           href="{{ route('blog.index') }}">Blog</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('contact') ? 'active' : '' }}"
@@ -109,7 +117,7 @@
                     <a href="{{ route('home') }}">Inicio</a>
                     <a href="{{ route('catalog.index') }}">Catálogo</a>
                     <a href="{{ route('about') }}">Sobre nosotros</a>
-                    <a href="{{ url('#') }}">Blog</a>
+                    <a href="{{ route('blog.index') }}">Blog</a>
                     <a href="{{ route('contact') }}">Contacto</a>
                 </div>
                 <div class="col-6 col-md-5">

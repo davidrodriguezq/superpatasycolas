@@ -1,7 +1,7 @@
 @extends('layouts.public')
 
 @section('title', 'Catálogo de mascotas — Super Patas y Colas')
-@section('meta-description', 'Encuentra a tu nueva mascota. Perros y gatos disponibles para adopción en el albergue Super Patas y Colas, San Martín de Porres.')
+@section('meta-description', 'Conoce a las mascotas disponibles para adopción en Super Patas y Colas. Perros y gatos rescatados esperan un hogar en Lima.')
 
 @section('content')
 

@@ -77,8 +77,8 @@
                        class="{{ request()->routeIs('admin.followups.index') && request()->filled('critical') ? 'active' : '' }}">Alertas críticas</a></li>
             </ul>
 
-            <a href="{{ url('/admin/blog') }}"
-               class="admin-nav-item {{ request()->routeIs('admin.blog.*') ? 'active' : '' }}">
+            <a href="{{ route('admin.blog-posts.index') }}"
+               class="admin-nav-item {{ request()->routeIs('admin.blog-posts.*') ? 'active' : '' }}">
                 <i class="bi bi-newspaper"></i> Blog
             </a>
 

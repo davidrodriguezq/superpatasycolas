@@ -720,6 +720,33 @@ a:hover { color: var(--spyc-naranja-hover); }
 }
 
 /* ============================================================
+   F3-T07 — Corrección responsive footer
+   Evita desbordamiento de strings largos (email) en móvil
+============================================================ */
+footer a,
+footer p,
+footer li,
+footer span,
+footer div {
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+/* ============================================================
+   F3-T07 — Ajustes responsive generales (mín. 360 px)
+============================================================ */
+@media (max-width: 575.98px) {
+    /* Catálogo — cards de animales en 2 columnas compactas */
+    .spyc-catalog-card .card-body {
+        padding: .6rem .75rem;
+    }
+    /* Detalle de mascota — botón de adopción ancho completo */
+    .col-md-6 .btn-lg {
+        width: 100%;
+    }
+}
+
+/* ============================================================
    Responsive — sidebar colapsable en móvil (< 992 px)
 ============================================================ */
 .admin-sidebar-backdrop {

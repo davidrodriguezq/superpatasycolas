@@ -1,7 +1,7 @@
 @extends('layouts.public')
 
 @section('title', 'Super Patas y Colas — Albergue de animales en San Martín de Porres')
-@section('meta-description', 'Adoptá responsablemente. Super Patas y Colas rescata y da hogar temporal a perros y gatos en San Martín de Porres, Lima.')
+@section('meta-description', 'Super Patas y Colas es un albergue de animales en San Martín de Porres, Lima. Adopta perros y gatos rescatados. Adopción responsable, gratuita y con seguimiento.')
 
 @section('content')
 
@@ -19,7 +19,7 @@
                     En Super Patas y Colas damos hogar temporal a perros y gatos rescatados
                     en San Martín de Porres. Cada adopción responsable cambia dos vidas.
                 </p>
-                <div class="d-flex flex-wrap gap-3 justify-content-center mt-4">
+                <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center mt-4">
                     <a href="{{ route('catalog.index') }}" class="btn btn-primary btn-lg px-4">
                         <i class="bi bi-search-heart me-2"></i>Ver mascotas disponibles
                     </a>
@@ -158,7 +158,8 @@
                         </p>
                     </div>
                     <div class="card-footer bg-transparent border-0 pt-0 pb-3 px-3">
-                        <a href="{{ url('#') }}" class="btn btn-sm btn-outline-primary w-100">
+                        <a href="{{ route('blog.show', $post->slug) }}"
+                           class="btn btn-sm btn-outline-primary w-100">
                             Leer más
                         </a>
                     </div>
@@ -179,7 +180,7 @@
         <p class="mb-4" style="opacity:.9; font-size:1.05rem;">
             Regístrate y comienza el proceso. Es rápido y completamente gratis.
         </p>
-        <div class="d-flex flex-wrap gap-3 justify-content-center">
+        <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center">
             <a href="{{ route('register') }}"
                class="btn btn-light btn-lg px-4 fw-semibold"
                style="color: var(--spyc-naranja);">

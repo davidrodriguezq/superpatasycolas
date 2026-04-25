@@ -1,7 +1,7 @@
 @extends('layouts.public')
 
 @section('title', 'Contacto — Super Patas y Colas')
-@section('meta-description', '¿Tienes dudas o quieres colaborar? Escríbenos. Super Patas y Colas, albergue animal en San Martín de Porres, Lima.')
+@section('meta-description', 'Contacta al albergue Super Patas y Colas en San Martín de Porres, Lima. Visítanos, escríbenos o llámanos.')
 
 @section('content')
 
@@ -27,8 +27,8 @@
 
         <div class="row g-4">
 
-            {{-- Columna izquierda: info de contacto --}}
-            <div class="col-md-5">
+            {{-- Columna izquierda: info de contacto (en móvil aparece debajo del formulario) --}}
+            <div class="col-md-5 order-2 order-md-1">
                 <div class="card border-0 shadow-sm h-100" style="border-radius:12px;">
                     <div class="card-body p-4">
                         <h5 class="fw-bold mb-4" style="color:#2a2622;">Información de contacto</h5>
@@ -75,8 +75,8 @@
                 </div>
             </div>
 
-            {{-- Columna derecha: formulario --}}
-            <div class="col-md-7">
+            {{-- Columna derecha: formulario (en móvil aparece primero) --}}
+            <div class="col-md-7 order-1 order-md-2">
                 <div class="card border-0 shadow-sm" style="border-radius:12px;">
                     <div class="card-body p-4">
                         <h5 class="fw-bold mb-4" style="color:#2a2622;">Envíanos un mensaje</h5>

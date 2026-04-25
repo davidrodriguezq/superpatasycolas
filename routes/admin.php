@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdoptionRequestController;
 use App\Http\Controllers\Admin\AnimalController;
+use App\Http\Controllers\Admin\BlogPostController;
 use App\Http\Controllers\Admin\CessionRequestController;
 use App\Http\Controllers\Admin\FollowupController;
 use App\Http\Controllers\Admin\MedicalRecordController;
@@ -51,6 +52,9 @@ Route::resource('cession-requests', CessionRequestController::class)
     ->parameters(['cession-requests' => 'cessionRequest']);
 Route::patch('cession-requests/{cessionRequest}/accept', [CessionRequestController::class, 'accept'])->name('cession-requests.accept');
 Route::patch('cession-requests/{cessionRequest}/reject', [CessionRequestController::class, 'reject'])->name('cession-requests.reject');
+
+// Fase 3: blog — F3-T06
+Route::resource('blog-posts', BlogPostController::class)->except(['show']);
 
 // Fase 2: seguimientos — F2-T15 a F2-T19
 Route::get('followups', [FollowupController::class, 'index'])->name('followups.index');

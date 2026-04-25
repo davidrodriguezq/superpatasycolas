@@ -1,7 +1,11 @@
 @extends('layouts.public')
 
 @section('title', $animal->name . ' — Adopta en Super Patas y Colas')
-@section('meta-description', 'Conoce a ' . $animal->name . ', un ' . $animal->species->label() . ' disponible para adopción en el albergue Super Patas y Colas.')
+@section('meta-description', 'Adopta a ' . $animal->name . ', ' . $animal->species->label() . ($animal->breed ? ' ' . $animal->breed : '') . ' de ' . $animal->age_formatted . '. Disponible en Super Patas y Colas, albergue en San Martín de Porres, Lima.')
+
+@push('og-image')
+<meta property="og:image" content="{{ $animal->primaryPhoto ? asset('storage/' . $animal->primaryPhoto->path) : asset('images/logo.png') }}">
+@endpush
 
 @section('content')
 

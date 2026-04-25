@@ -1,7 +1,7 @@
 @extends('layouts.public')
 
 @section('title', 'Sobre nosotros — Super Patas y Colas')
-@section('meta-description', 'Conoce la historia, misión y visión del albergue Super Patas y Colas en San Martín de Porres, Lima.')
+@section('meta-description', 'Conoce la historia, misión y equipo de Super Patas y Colas, albergue de animales en San Martín de Porres, Lima.')
 
 @section('content')
 

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Public\AdoptionController;
+use App\Http\Controllers\Public\BlogController;
 use App\Http\Controllers\Public\CatalogController;
 use App\Http\Controllers\Public\CessionController;
 use App\Http\Controllers\Public\HomeController;
@@ -28,6 +29,9 @@ Route::get('/catalogo/{animal}', [CatalogController::class, 'show'])->name('cata
 Route::get('/sobre-nosotros', [PageController::class, 'about'])->name('about');
 Route::get('/contacto', [PageController::class, 'contact'])->name('contact');
 Route::post('/contacto', [PageController::class, 'sendContact'])->name('contact.send');
+
+Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
+Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
 
 // Fase 1: perfil de usuario — F1-T06
 Route::middleware('auth')->group(function () {
