@@ -38,12 +38,62 @@ class PostAdoptionFollowup extends Model
         return $this->hasMany(FollowupPhoto::class, 'followup_id');
     }
 
-    // Casos con condición crítica: animal en mal estado u hogar inadecuado
+    public function scopeByAdoptionRequest(Builder $query, int $adoptionRequestId): Builder
+    {
+        return $query->where('adoption_request_id', $adoptionRequestId);
+    }
+
     public function scopeCritical(Builder $query): Builder
     {
         return $query->where(function (Builder $q) {
             $q->where('animal_condition', AnimalCondition::Poor->value)
               ->orWhere('home_condition', HomeCondition::Inadequate->value);
         });
+    }
+
+    public function scopeRecent(Builder $query): Builder
+    {
+        return $query->orderBy('visit_date', 'desc');
+    }
+
+    public static function criticalCount(): int
+    {
+        return static::critical()->count();
+    }
+
+    public function getAnimalConditionBadgeClassAttribute(): string
+    {
+        return match ($this->animal_condition) {
+            AnimalCondition::Good => 'bg-success',
+            AnimalCondition::Fair => 'bg-warning text-dark',
+            AnimalCondition::Poor => 'bg-danger',
+            default               => 'bg-secondary',
+        };
+    }
+
+    public function getHomeConditionBadgeClassAttribute(): string
+    {
+        return match ($this->home_condition) {
+            HomeCondition::Adequate         => 'bg-success',
+            HomeCondition::NeedsImprovement => 'bg-warning text-dark',
+            HomeCondition::Inadequate       => 'bg-danger',
+            default                         => 'bg-secondary',
+        };
+    }
+
+    public function getAnimalConditionLabelAttribute(): string
+    {
+        return $this->animal_condition?->label() ?? '—';
+    }
+
+    public function getHomeConditionLabelAttribute(): string
+    {
+        return $this->home_condition?->label() ?? '—';
+    }
+
+    public function getIsCriticalAttribute(): bool
+    {
+        return $this->animal_condition === AnimalCondition::Poor
+            || $this->home_condition === HomeCondition::Inadequate;
     }
 }

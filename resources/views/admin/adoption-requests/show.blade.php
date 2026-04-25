@@ -191,6 +191,75 @@
 </div>
 
 {{-- Botones de acción --}}
+{{-- Seguimientos post-adopción (solo si aprobada) --}}
+@if ($adoptionRequest->status === \App\Enums\AdoptionRequestStatus::Approved)
+    <div class="card border-0 shadow-sm mb-4" style="border-radius: 8px;">
+        <div class="card-header bg-white border-0 d-flex justify-content-between align-items-center pt-3 px-4 pb-2"
+             style="border-radius: 8px 8px 0 0;">
+            <span class="fw-semibold">
+                <i class="bi bi-clipboard-check me-2 spyc-text-naranja"></i>
+                Seguimiento post-adopción
+                @if ($adoptionRequest->followups->count() > 0)
+                    <span class="badge bg-secondary ms-1">{{ $adoptionRequest->followups->count() }}</span>
+                @endif
+            </span>
+            <a href="{{ route('admin.followups.create', $adoptionRequest) }}"
+               class="btn btn-sm btn-primary">
+                <i class="bi bi-plus-circle me-1"></i> Nuevo seguimiento
+            </a>
+        </div>
+
+        @if ($adoptionRequest->followups->count() > 0)
+            <div class="table-responsive">
+                <table class="table table-hover mb-0 admin-table-inner">
+                    <thead>
+                        <tr>
+                            <th style="font-size:.78rem;text-transform:uppercase;color:#6b6358;padding:12px 16px;background:#FAF6F2;">Fecha</th>
+                            <th style="font-size:.78rem;text-transform:uppercase;color:#6b6358;padding:12px 16px;background:#FAF6F2;">Estado animal</th>
+                            <th style="font-size:.78rem;text-transform:uppercase;color:#6b6358;padding:12px 16px;background:#FAF6F2;">Condición hogar</th>
+                            <th style="font-size:.78rem;text-transform:uppercase;color:#6b6358;padding:12px 16px;background:#FAF6F2;">Observaciones</th>
+                            <th style="font-size:.78rem;text-transform:uppercase;color:#6b6358;padding:12px 16px;background:#FAF6F2;width:70px;"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($adoptionRequest->followups as $followup)
+                            <tr class="{{ $followup->is_critical ? 'table-danger' : '' }}">
+                                <td class="small fw-semibold">{{ $followup->visit_date?->format('d/m/Y') }}</td>
+                                <td class="small">
+                                    <span class="badge {{ $followup->animal_condition_badge_class }}">
+                                        {{ $followup->animal_condition_label }}
+                                    </span>
+                                </td>
+                                <td class="small">
+                                    <span class="badge {{ $followup->home_condition_badge_class }}">
+                                        {{ $followup->home_condition_label }}
+                                    </span>
+                                </td>
+                                <td class="small text-muted">
+                                    {{ \Illuminate\Support\Str::limit($followup->observations, 80) }}
+                                </td>
+                                <td>
+                                    <a href="{{ route('admin.followups.show', $followup) }}"
+                                       class="btn btn-sm btn-outline-secondary" title="Ver detalle">
+                                        <i class="bi bi-eye"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        @else
+            <div class="card-body px-4 pb-4">
+                <p class="text-muted small mb-0">
+                    <i class="bi bi-info-circle me-1"></i>
+                    Aún no hay seguimientos registrados para esta adopción.
+                </p>
+            </div>
+        @endif
+    </div>
+@endif
+
 @if ($adoptionRequest->status === \App\Enums\AdoptionRequestStatus::Pending)
     <div class="card border-0 shadow-sm mb-4" style="border-radius: 8px;">
         <div class="card-body px-4 py-4">

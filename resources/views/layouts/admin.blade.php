@@ -71,10 +71,10 @@
             </a>
             <ul class="admin-nav-sub collapse {{ request()->routeIs('admin.followups.*') ? 'show' : '' }}"
                 id="subFollowup">
-                <li><a href="{{ url('/admin/seguimiento') }}"
-                       class="{{ request()->routeIs('admin.followups.index') ? 'active' : '' }}">Registros</a></li>
-                <li><a href="{{ url('/admin/seguimiento/alertas') }}"
-                       class="{{ request()->routeIs('admin.followups.alerts') ? 'active' : '' }}">Alertas</a></li>
+                <li><a href="{{ route('admin.followups.index') }}"
+                       class="{{ request()->routeIs('admin.followups.index') && !request()->filled('critical') ? 'active' : '' }}">Registros</a></li>
+                <li><a href="{{ route('admin.followups.index', ['critical' => 1]) }}"
+                       class="{{ request()->routeIs('admin.followups.index') && request()->filled('critical') ? 'active' : '' }}">Alertas críticas</a></li>
             </ul>
 
             <a href="{{ url('/admin/blog') }}"

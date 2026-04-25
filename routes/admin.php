@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdoptionRequestController;
 use App\Http\Controllers\Admin\AnimalController;
 use App\Http\Controllers\Admin\CessionRequestController;
+use App\Http\Controllers\Admin\FollowupController;
 use App\Http\Controllers\Admin\MedicalRecordController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
@@ -12,7 +13,15 @@ use Illuminate\Support\Facades\Route;
  * Prefijo: /admin  |  Middleware: auth + role:admin|collaborator  |  Name prefix: admin.
  */
 
-Route::get('/dashboard', fn () => view('admin.dashboard'))->name('dashboard');
+Route::get('/dashboard', function () {
+    $criticalCount     = \App\Models\PostAdoptionFollowup::critical()->count();
+    $criticalFollowups = \App\Models\PostAdoptionFollowup::critical()
+        ->with(['adoptionRequest.animal', 'adoptionRequest.user'])
+        ->latest('visit_date')
+        ->limit(5)
+        ->get();
+    return view('admin.dashboard', compact('criticalCount', 'criticalFollowups'));
+})->name('dashboard');
 
 // Fase 1: usuarios — F1-T05 (solo admin, no collaborator)
 Route::middleware('role:admin')->group(function () {
@@ -43,5 +52,9 @@ Route::resource('cession-requests', CessionRequestController::class)
 Route::patch('cession-requests/{cessionRequest}/accept', [CessionRequestController::class, 'accept'])->name('cession-requests.accept');
 Route::patch('cession-requests/{cessionRequest}/reject', [CessionRequestController::class, 'reject'])->name('cession-requests.reject');
 
-// Fase 2: seguimientos — F2-T16
-// Route::resource('/seguimiento', Admin\PostAdoptionFollowupController::class)->names('followups');
+// Fase 2: seguimientos — F2-T15 a F2-T19
+Route::get('followups', [FollowupController::class, 'index'])->name('followups.index');
+Route::get('adoption-requests/{adoptionRequest}/followups/create', [FollowupController::class, 'create'])->name('followups.create');
+Route::post('adoption-requests/{adoptionRequest}/followups', [FollowupController::class, 'store'])->name('followups.store');
+Route::get('followups/{followup}', [FollowupController::class, 'show'])->name('followups.show');
+Route::delete('followups/{followup}', [FollowupController::class, 'destroy'])->name('followups.destroy');

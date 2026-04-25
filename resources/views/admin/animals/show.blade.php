@@ -306,7 +306,84 @@
     </div>
 </div>
 
-{{-- SECCIÓN 5 — Cambio rápido de estado --}}
+{{-- SECCIÓN 5 — Seguimientos post-adopción --}}
+@php
+    $approvedRequest = $animal->adoptionRequests->firstWhere(
+        'status', \App\Enums\AdoptionRequestStatus::Approved
+    );
+    $allFollowups = $approvedRequest?->followups ?? collect();
+@endphp
+@if ($animal->status === \App\Enums\AnimalStatus::Adopted || $allFollowups->count() > 0)
+<div class="card border-0 shadow-sm mb-4" style="border-radius: 8px;">
+    <div class="card-header bg-white border-0 d-flex justify-content-between align-items-center pt-3 px-4 pb-2"
+         style="border-radius: 8px 8px 0 0;">
+        <span class="fw-semibold">
+            <i class="bi bi-clipboard-check me-2 spyc-text-naranja"></i>
+            Seguimiento post-adopción
+            @if ($allFollowups->count() > 0)
+                <span class="badge bg-secondary ms-1">{{ $allFollowups->count() }}</span>
+            @endif
+        </span>
+        @if ($approvedRequest)
+            <a href="{{ route('admin.followups.create', $approvedRequest) }}"
+               class="btn btn-sm btn-primary">
+                <i class="bi bi-plus-circle me-1"></i> Nuevo seguimiento
+            </a>
+        @endif
+    </div>
+
+    @if ($allFollowups->count() > 0)
+        <div class="table-responsive">
+            <table class="table table-hover mb-0 admin-table-inner">
+                <thead>
+                    <tr>
+                        <th style="font-size:.78rem;text-transform:uppercase;color:#6b6358;padding:12px 16px;background:#FAF6F2;">Fecha</th>
+                        <th style="font-size:.78rem;text-transform:uppercase;color:#6b6358;padding:12px 16px;background:#FAF6F2;">Estado animal</th>
+                        <th style="font-size:.78rem;text-transform:uppercase;color:#6b6358;padding:12px 16px;background:#FAF6F2;">Condición hogar</th>
+                        <th style="font-size:.78rem;text-transform:uppercase;color:#6b6358;padding:12px 16px;background:#FAF6F2;">Observaciones</th>
+                        <th style="font-size:.78rem;text-transform:uppercase;color:#6b6358;padding:12px 16px;background:#FAF6F2;width:70px;"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($allFollowups as $followup)
+                        <tr>
+                            <td class="small fw-semibold">{{ $followup->visit_date?->format('d/m/Y') }}</td>
+                            <td class="small">
+                                <span class="badge {{ $followup->animal_condition_badge_class }}">
+                                    {{ $followup->animal_condition_label }}
+                                </span>
+                            </td>
+                            <td class="small">
+                                <span class="badge {{ $followup->home_condition_badge_class }}">
+                                    {{ $followup->home_condition_label }}
+                                </span>
+                            </td>
+                            <td class="small text-muted">
+                                {{ \Illuminate\Support\Str::limit($followup->observations, 80) }}
+                            </td>
+                            <td>
+                                <a href="{{ route('admin.followups.show', $followup) }}"
+                                   class="btn btn-sm btn-outline-secondary" title="Ver detalle">
+                                    <i class="bi bi-eye"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    @else
+        <div class="card-body px-4 pb-4">
+            <p class="text-muted small mb-0">
+                <i class="bi bi-info-circle me-1"></i>
+                Aún no hay seguimientos registrados para esta adopción.
+            </p>
+        </div>
+    @endif
+</div>
+@endif
+
+{{-- SECCIÓN 6 — Cambio rápido de estado --}}
 <div class="card border-0 shadow-sm mb-4" style="border-radius: 8px;">
     <div class="card-header bg-white border-0 fw-semibold pt-3 px-4 pb-2" style="border-radius: 8px 8px 0 0;">
         <i class="bi bi-arrow-left-right me-2 spyc-text-naranja"></i> Cambiar estado

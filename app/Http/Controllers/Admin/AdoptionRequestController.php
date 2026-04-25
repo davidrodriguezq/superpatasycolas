@@ -43,8 +43,10 @@ class AdoptionRequestController extends Controller
     {
         $adoptionRequest->load([
             'user',
-            'animal.photos' => fn ($q) => $q->orderByDesc('is_primary')->orderBy('id'),
+            'animal.photos'   => fn ($q) => $q->orderByDesc('is_primary')->orderBy('id'),
             'approvedBy',
+            'followups'        => fn ($q) => $q->orderByDesc('visit_date'),
+            'followups.photos',
         ]);
 
         return view('admin.adoption-requests.show', ['adoptionRequest' => $adoptionRequest]);

@@ -72,10 +72,12 @@ class AnimalController extends Controller
     public function show(Animal $animal): View
     {
         $animal->load([
-            'photos'                 => fn ($q) => $q->orderByDesc('is_primary')->orderBy('id'),
-            'medicalRecords'         => fn ($q) => $q->orderByDesc('date')->orderByDesc('id'),
+            'photos'                           => fn ($q) => $q->orderByDesc('is_primary')->orderBy('id'),
+            'medicalRecords'                   => fn ($q) => $q->orderByDesc('date')->orderByDesc('id'),
             'cedente',
             'adoptionRequests.user',
+            'adoptionRequests.followups'       => fn ($q) => $q->orderByDesc('visit_date'),
+            'adoptionRequests.followups.photos',
         ]);
 
         return view('admin.animals.show', compact('animal'));
