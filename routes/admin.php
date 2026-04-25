@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdoptionRequestController;
 use App\Http\Controllers\Admin\AnimalController;
 use App\Http\Controllers\Admin\BlogPostController;
 use App\Http\Controllers\Admin\CessionRequestController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\FollowupController;
 use App\Http\Controllers\Admin\MedicalRecordController;
 use App\Http\Controllers\Admin\UserController;
@@ -14,15 +15,7 @@ use Illuminate\Support\Facades\Route;
  * Prefijo: /admin  |  Middleware: auth + role:admin|collaborator  |  Name prefix: admin.
  */
 
-Route::get('/dashboard', function () {
-    $criticalCount     = \App\Models\PostAdoptionFollowup::critical()->count();
-    $criticalFollowups = \App\Models\PostAdoptionFollowup::critical()
-        ->with(['adoptionRequest.animal', 'adoptionRequest.user'])
-        ->latest('visit_date')
-        ->limit(5)
-        ->get();
-    return view('admin.dashboard', compact('criticalCount', 'criticalFollowups'));
-})->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 // Fase 1: usuarios — F1-T05 (solo admin, no collaborator)
 Route::middleware('role:admin')->group(function () {
