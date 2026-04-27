@@ -14,6 +14,11 @@ class PageController extends Controller
         return view('public.pages.about');
     }
 
+    public function privacy()
+    {
+        return view('public.pages.privacy');
+    }
+
     public function contact()
     {
         return view('public.pages.contact');

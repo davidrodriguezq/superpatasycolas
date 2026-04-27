@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
             AnimalPhotoSeeder::class,
             MedicalRecordSeeder::class,
             AdoptionRequestSeeder::class,
-            CessionRequestSeeder::class,
+            // CessionRequestSeeder::class, // CessionRequestSeeder desactivado — módulo de cesión deshabilitado
             PostAdoptionFollowupSeeder::class,
             BlogPostSeeder::class,
         ]);

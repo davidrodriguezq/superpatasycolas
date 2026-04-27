@@ -176,9 +176,9 @@
 ============================================================ --}}
 <section id="contacto" class="py-5" style="background: var(--spyc-naranja);">
     <div class="container text-center text-white py-2">
-        <h2 class="fw-bold mb-2">¿Quieres adoptar o ceder un animal?</h2>
+        <h2 class="fw-bold mb-2">¿Quieres adoptar un amigo peludo?</h2>
         <p class="mb-4" style="opacity:.9; font-size:1.05rem;">
-            Regístrate y comienza el proceso. Es rápido y completamente gratis.
+            Regístrate y explora nuestras mascotas disponibles.
         </p>
         <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center">
             <a href="{{ route('register') }}"

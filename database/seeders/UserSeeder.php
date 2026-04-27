@@ -58,14 +58,14 @@ class UserSeeder extends Seeder
                 'email'   => 'pedro.huaman@gmail.com',
                 'phone'   => '921098765',
                 'address' => 'Av. Canta Callao 147, San Martín de Porres, Lima',
-                'role'    => 'surrenderer',
+                'role'    => 'adopter',
             ],
             [
                 'name'    => 'Carmen Quispe',
                 'email'   => 'carmen.quispe@gmail.com',
                 'phone'   => '910987654',
                 'address' => 'Jr. Los Pinos 258, Comas, Lima',
-                'role'    => 'surrenderer',
+                'role'    => 'adopter',
             ],
         ];
 

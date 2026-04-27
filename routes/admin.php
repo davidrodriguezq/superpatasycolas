@@ -39,12 +39,13 @@ Route::resource('adoption-requests', AdoptionRequestController::class)
 Route::patch('adoption-requests/{adoptionRequest}/approve', [AdoptionRequestController::class, 'approve'])->name('adoption-requests.approve');
 Route::patch('adoption-requests/{adoptionRequest}/reject', [AdoptionRequestController::class, 'reject'])->name('adoption-requests.reject');
 
-// Fase 2: cesiones — F2-T12, F2-T13
-Route::resource('cession-requests', CessionRequestController::class)
-    ->only(['index', 'show'])
-    ->parameters(['cession-requests' => 'cessionRequest']);
-Route::patch('cession-requests/{cessionRequest}/accept', [CessionRequestController::class, 'accept'])->name('cession-requests.accept');
-Route::patch('cession-requests/{cessionRequest}/reject', [CessionRequestController::class, 'reject'])->name('cession-requests.reject');
+// DESACTIVADO: Módulo de cesión deshabilitado por decisión del cliente.
+// El albergue no acepta animales por cesión, solo rescata. Código conservado para referencia.
+// Route::resource('cession-requests', CessionRequestController::class)
+//     ->only(['index', 'show'])
+//     ->parameters(['cession-requests' => 'cessionRequest']);
+// Route::patch('cession-requests/{cessionRequest}/accept', [CessionRequestController::class, 'accept'])->name('cession-requests.accept');
+// Route::patch('cession-requests/{cessionRequest}/reject', [CessionRequestController::class, 'reject'])->name('cession-requests.reject');
 
 // Fase 3: blog — F3-T06
 Route::resource('blog-posts', BlogPostController::class)->except(['show']);

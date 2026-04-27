@@ -127,21 +127,24 @@
     </div>
 </section>
 
-{{-- Ubicación --}}
+{{-- Contacto --}}
 <section class="py-5 spyc-bg-rosa">
     <div class="container">
         <div class="text-center mb-4">
-            <h2 class="fw-bold mb-1" style="color:#2a2622;">Ubicación y horarios</h2>
-            <p class="text-muted">Visítanos para conocer a nuestras mascotas en persona</p>
+            <h2 class="fw-bold mb-1" style="color:#2a2622;">¿Cómo contactarnos?</h2>
+            <p class="text-muted">Escríbenos o llámanos para coordinar tu visita</p>
         </div>
         <div class="row g-4 justify-content-center">
-            <div class="col-md-5">
+            <div class="col-md-7">
                 <div class="card border-0 shadow-sm h-100" style="border-radius:12px;">
                     <div class="card-body p-4">
                         <ul class="list-unstyled mb-0" style="line-height:2;">
                             <li class="d-flex gap-3">
                                 <i class="bi bi-geo-alt-fill spyc-text-naranja flex-shrink-0 mt-1"></i>
-                                <span>Av. Los Rescatados 1234, San Martín de Porres, Lima, Perú</span>
+                                <span>
+                                    Nos ubicamos en el distrito de San Martín de Porres, Lima.
+                                    Para conocer nuestra ubicación exacta, contáctanos por correo o teléfono y coordinaremos una visita.
+                                </span>
                             </li>
                             <li class="d-flex gap-3">
                                 <i class="bi bi-telephone-fill spyc-text-naranja flex-shrink-0 mt-1"></i>
@@ -156,16 +159,11 @@
                                 <span>Visitas: sábados y domingos · 10:00 – 17:00</span>
                             </li>
                         </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-5">
-                <div class="card border-0 shadow-sm h-100" style="border-radius:12px;">
-                    <div class="card-body p-4 d-flex flex-column align-items-center justify-content-center text-center"
-                         style="min-height:180px; background:#f3ece1; border-radius:12px;">
-                        <i class="bi bi-geo-alt spyc-text-naranja mb-2" style="font-size:2.5rem;"></i>
-                        <p class="text-muted mb-0">Mapa próximamente</p>
-                        <small class="text-muted">San Martín de Porres, Lima</small>
+                        <div class="mt-3">
+                            <a href="{{ route('contact') }}" class="btn btn-primary btn-sm">
+                                <i class="bi bi-envelope me-1"></i> Envíanos un mensaje
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>

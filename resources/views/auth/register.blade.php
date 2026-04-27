@@ -87,7 +87,7 @@
                             type="text"
                             class="form-control @error('address') is-invalid @enderror"
                             value="{{ old('address') }}"
-                            placeholder="Av. Los Rescatados 1234, SMP"
+                            placeholder="Ej. Jr. Las Flores 321, Independencia, Lima"
                             autocomplete="street-address"
                         >
                         @error('address')
@@ -95,46 +95,6 @@
                         @enderror
                     </div>
                 </div>
-
-                {{-- Tipo de cuenta --}}
-                <div class="spyc-form-section-label">¿Qué deseas hacer?</div>
-                <p style="font-size:.85rem; color:#8a7f72; margin:-4px 0 14px;">Elige el tipo de cuenta que mejor se ajuste a ti.</p>
-
-                <div class="spyc-role-group @error('role_type') is-invalid @enderror">
-                    <div class="spyc-role-option">
-                        <input
-                            type="radio"
-                            name="role_type"
-                            id="role-adopter"
-                            value="adopter"
-                            {{ old('role_type', 'adopter') === 'adopter' ? 'checked' : '' }}
-                        >
-                        <label for="role-adopter">
-                            <div class="spyc-role-icon"><i class="bi bi-heart"></i></div>
-                            <div class="spyc-role-title">Quiero adoptar una mascota</div>
-                            <div class="spyc-role-desc">Podrás explorar el catálogo y enviar solicitudes de adopción.</div>
-                            <div class="spyc-role-check"><i class="bi bi-check-lg"></i></div>
-                        </label>
-                    </div>
-                    <div class="spyc-role-option">
-                        <input
-                            type="radio"
-                            name="role_type"
-                            id="role-surrenderer"
-                            value="surrenderer"
-                            {{ old('role_type') === 'surrenderer' ? 'checked' : '' }}
-                        >
-                        <label for="role-surrenderer">
-                            <div class="spyc-role-icon"><i class="bi bi-box-arrow-in-right"></i></div>
-                            <div class="spyc-role-title">Quiero entregar un animal al albergue</div>
-                            <div class="spyc-role-desc">Podrás registrar solicitudes de cesión de animales.</div>
-                            <div class="spyc-role-check"><i class="bi bi-check-lg"></i></div>
-                        </label>
-                    </div>
-                </div>
-                @error('role_type')
-                    <div class="text-danger small mt-1">{{ $message }}</div>
-                @enderror
 
                 {{-- Seguridad --}}
                 <div class="spyc-form-section-label" style="margin-top:22px;">Seguridad</div>
@@ -185,7 +145,23 @@
                     Mínimo 8 caracteres. Te recomendamos combinar letras, números y un símbolo.
                 </div>
 
-                <button type="submit" class="btn btn-primary w-100 mt-4">
+                <div class="form-check mb-3 mt-4">
+                    <input class="form-check-input @error('privacy_policy') is-invalid @enderror"
+                           type="checkbox"
+                           name="privacy_policy"
+                           id="privacy_policy"
+                           value="1"
+                           {{ old('privacy_policy') ? 'checked' : '' }}
+                           required>
+                    <label class="form-check-label" for="privacy_policy">
+                        He leído y acepto la <a href="{{ route('privacy') }}" target="_blank" class="spyc-link">Política de Privacidad</a> y autorizo el tratamiento de mis datos personales conforme a la Ley N° 29733.
+                    </label>
+                    @error('privacy_policy')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100">
                     <i class="bi bi-person-check me-1"></i> Crear cuenta
                 </button>
 

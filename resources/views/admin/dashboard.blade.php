@@ -73,12 +73,12 @@
 
 {{-- FILA 2: métricas secundarias --}}
 <div class="row g-3 mb-4">
-    <div class="col-xl-3 col-md-6">
+    <div class="col-xl-4 col-md-4">
         <div class="card border-0 shadow-sm h-100">
             <div class="card-body d-flex align-items-center gap-3 py-3">
                 <i class="bi bi-hourglass-split fs-3 text-muted flex-shrink-0"></i>
                 <div>
-                    <div class="fw-bold {{ $pendingAdoptionRequests > 0 ? '' : '' }}"
+                    <div class="fw-bold"
                          style="font-size:1.4rem;line-height:1;color:{{ $pendingAdoptionRequests > 0 ? 'var(--spyc-naranja)' : '#2a2622' }};">
                         {{ $pendingAdoptionRequests }}
                     </div>
@@ -87,21 +87,7 @@
             </div>
         </div>
     </div>
-    <div class="col-xl-3 col-md-6">
-        <div class="card border-0 shadow-sm h-100">
-            <div class="card-body d-flex align-items-center gap-3 py-3">
-                <i class="bi bi-box-arrow-in-right fs-3 text-muted flex-shrink-0"></i>
-                <div>
-                    <div class="fw-bold"
-                         style="font-size:1.4rem;line-height:1;color:{{ $pendingCessionRequests > 0 ? 'var(--spyc-naranja)' : '#2a2622' }};">
-                        {{ $pendingCessionRequests }}
-                    </div>
-                    <div class="text-muted small">Cesiones pendientes</div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-xl-3 col-md-6">
+    <div class="col-xl-4 col-md-4">
         <div class="card border-0 shadow-sm h-100">
             <div class="card-body d-flex align-items-center gap-3 py-3">
                 <i class="bi bi-people fs-3 text-muted flex-shrink-0"></i>
@@ -112,7 +98,7 @@
             </div>
         </div>
     </div>
-    <div class="col-xl-3 col-md-6">
+    <div class="col-xl-4 col-md-4">
         <div class="card border-0 shadow-sm h-100">
             <div class="card-body d-flex align-items-center gap-3 py-3">
                 <i class="bi bi-trophy fs-3 text-muted flex-shrink-0"></i>
@@ -268,7 +254,7 @@
 
 {{-- FILA 5: Actividad reciente --}}
 <div class="row g-3">
-    <div class="col-md-6">
+    <div class="col-12">
         <div class="card border-0 shadow-sm">
             <div class="card-header bg-transparent border-0 pt-4 px-4 pb-2 d-flex justify-content-between align-items-center">
                 <h6 class="fw-semibold mb-0">Últimas solicitudes de adopción</h6>
@@ -290,43 +276,6 @@
                             <tr>
                                 <td class="px-3 small fw-semibold">{{ $req->user?->name ?? '—' }}</td>
                                 <td class="px-3 small">{{ $req->animal?->name ?? '—' }}</td>
-                                <td class="px-3 small">
-                                    <span class="badge {{ $req->status_badge_class }}">{{ $req->status_label }}</span>
-                                </td>
-                                <td class="px-3 small text-muted">{{ $req->created_at->format('d/m/Y') }}</td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="4" class="text-center text-muted py-3 small">Sin solicitudes registradas</td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="card border-0 shadow-sm">
-            <div class="card-header bg-transparent border-0 pt-4 px-4 pb-2 d-flex justify-content-between align-items-center">
-                <h6 class="fw-semibold mb-0">Últimas solicitudes de cesión</h6>
-                <a href="{{ route('admin.cession-requests.index') }}"
-                   class="btn btn-sm btn-outline-secondary">Ver todas</a>
-            </div>
-            <div class="table-responsive">
-                <table class="table table-hover table-sm mb-0">
-                    <thead style="background:#FAF6F2;">
-                        <tr>
-                            <th class="px-3" style="font-size:.73rem;color:#6b6358;text-transform:uppercase;font-weight:600;">Cedente</th>
-                            <th class="px-3" style="font-size:.73rem;color:#6b6358;text-transform:uppercase;font-weight:600;">Animal propuesto</th>
-                            <th class="px-3" style="font-size:.73rem;color:#6b6358;text-transform:uppercase;font-weight:600;">Estado</th>
-                            <th class="px-3" style="font-size:.73rem;color:#6b6358;text-transform:uppercase;font-weight:600;">Fecha</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse($recentCessionRequests as $req)
-                            <tr>
-                                <td class="px-3 small fw-semibold">{{ $req->user?->name ?? '—' }}</td>
-                                <td class="px-3 small">{{ $req->animal_name ?? '—' }}</td>
                                 <td class="px-3 small">
                                     <span class="badge {{ $req->status_badge_class }}">{{ $req->status_label }}</span>
                                 </td>

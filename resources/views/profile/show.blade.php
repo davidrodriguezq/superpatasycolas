@@ -44,7 +44,7 @@
                     @elseif ($role === 'adopter')
                         <span class="badge bg-success">Adoptante</span>
                     @elseif ($role === 'surrenderer')
-                        <span class="badge bg-warning text-dark">Cedente</span>
+                        <span class="badge bg-success">Adoptante</span>
                     @endif
                 </dd>
 
@@ -102,40 +102,14 @@
 
             @elseif ($role === 'surrenderer')
 
-                @if ($user->cessionRequests->isEmpty())
-                    <div class="text-center py-4">
-                        <i class="bi bi-box-arrow-in-right text-muted fs-2 d-block mb-2"></i>
-                        <p class="text-muted mb-3">Aún no has registrado solicitudes de cesión.</p>
-                        <a href="{{ route('cession.create') }}" class="btn btn-primary btn-sm">
-                            <i class="bi bi-plus-lg me-1"></i> Registrar cesión
-                        </a>
-                    </div>
-                @else
-                    <div class="list-group list-group-flush">
-                        @foreach ($user->cessionRequests->take(3) as $cession)
-                            <div class="list-group-item px-0 py-3 border-0 border-bottom">
-                                <div class="d-flex justify-content-between align-items-start">
-                                    <div>
-                                        <div class="fw-semibold small" style="color: #2a2622;">
-                                            {{ $cession->animal_name ?? 'Solicitud de cesión' }}
-                                        </div>
-                                        <div class="text-muted" style="font-size: .8rem;">
-                                            {{ Str::limit($cession->reason, 60) }}
-                                            &nbsp;·&nbsp;
-                                            {{ $cession->created_at->format('d/m/Y') }}
-                                        </div>
-                                    </div>
-                                    <span class="badge {{ $cession->status_badge_class }}">{{ $cession->status_label }}</span>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-                    <div class="text-end mt-3">
-                        <a href="{{ route('cession.my-requests') }}" class="btn btn-sm btn-outline-primary">
-                            Ver todas mis cesiones <i class="bi bi-arrow-right ms-1"></i>
-                        </a>
-                    </div>
-                @endif
+                {{-- DESACTIVADO: Módulo de cesión deshabilitado. Usuarios con rol surrenderer se muestran como adoptantes. --}}
+                <div class="text-center py-4">
+                    <i class="bi bi-house-heart text-muted fs-2 d-block mb-2"></i>
+                    <p class="text-muted mb-3">Aún no has enviado solicitudes de adopción.</p>
+                    <a href="{{ route('catalog.index') }}" class="btn btn-primary btn-sm">
+                        <i class="bi bi-search me-1"></i> Explora nuestro catálogo
+                    </a>
+                </div>
 
             @else
                 <p class="text-muted mb-0 small">

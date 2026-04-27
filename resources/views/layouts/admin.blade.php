@@ -51,7 +51,8 @@
                        class="{{ request()->routeIs('admin.adoption-requests.*') ? 'active' : '' }}">Solicitudes</a></li>
             </ul>
 
-            <a href="#subCessions" data-bs-toggle="collapse" role="button"
+            {{-- DESACTIVADO: Módulo de cesión deshabilitado por decisión del cliente --}}
+            {{-- <a href="#subCessions" data-bs-toggle="collapse" role="button"
                class="admin-nav-item {{ request()->routeIs('admin.cession-requests.*') ? 'active' : '' }}"
                aria-expanded="{{ request()->routeIs('admin.cession-requests.*') ? 'true' : 'false' }}">
                 <i class="bi bi-box-arrow-in-right"></i> Cesiones
@@ -61,7 +62,7 @@
                 id="subCessions">
                 <li><a href="{{ route('admin.cession-requests.index') }}"
                        class="{{ request()->routeIs('admin.cession-requests.*') ? 'active' : '' }}">Solicitudes</a></li>
-            </ul>
+            </ul> --}}
 
             <a href="#subFollowup" data-bs-toggle="collapse" role="button"
                class="admin-nav-item {{ request()->routeIs('admin.followups.*') ? 'active' : '' }}"

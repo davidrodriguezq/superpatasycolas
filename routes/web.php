@@ -33,6 +33,8 @@ Route::post('/contacto', [PageController::class, 'sendContact'])->name('contact.
 Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
 Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
 
+Route::get('/politica-de-privacidad', [PageController::class, 'privacy'])->name('privacy');
+
 // Fase 1: perfil de usuario — F1-T06
 Route::middleware('auth')->group(function () {
     Route::get('/perfil', [ProfileController::class, 'show'])->name('profile.show');
@@ -47,11 +49,12 @@ Route::middleware(['auth', 'role:adopter'])->group(function () {
     Route::get('/mis-solicitudes', [AdoptionController::class, 'myRequests'])->name('adoption.my-requests');
 });
 
-// Fase 2: cesión de animales — F2-T11
-Route::middleware(['auth', 'role:surrenderer'])->group(function () {
-    Route::get('/cesion/solicitar', [CessionController::class, 'create'])->name('cession.create');
-    Route::post('/cesion/solicitar', [CessionController::class, 'store'])->name('cession.store');
-    Route::get('/mis-cesiones', [CessionController::class, 'myRequests'])->name('cession.my-requests');
-});
+// DESACTIVADO: Módulo de cesión deshabilitado por decisión del cliente.
+// El albergue no acepta animales por cesión, solo rescata. Código conservado para referencia.
+// Route::middleware(['auth', 'role:surrenderer'])->group(function () {
+//     Route::get('/cesion/solicitar', [CessionController::class, 'create'])->name('cession.create');
+//     Route::post('/cesion/solicitar', [CessionController::class, 'store'])->name('cession.store');
+//     Route::get('/mis-cesiones', [CessionController::class, 'myRequests'])->name('cession.my-requests');
+// });
 
 require __DIR__.'/auth.php';

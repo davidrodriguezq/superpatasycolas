@@ -75,9 +75,10 @@
                                 @role('adopter')
                                     <li><a class="dropdown-item" href="{{ route('adoption.my-requests') }}">Mis solicitudes</a></li>
                                 @endrole
-                                @role('surrenderer')
+                                {{-- DESACTIVADO: Módulo de cesión deshabilitado por decisión del cliente --}}
+                                {{-- @role('surrenderer')
                                     <li><a class="dropdown-item" href="{{ route('cession.my-requests') }}">Mis cesiones</a></li>
-                                @endrole
+                                @endrole --}}
                                 <li><hr class="dropdown-divider"></li>
                                 <li>
                                     <form method="POST" action="{{ route('logout') }}">
@@ -119,13 +120,14 @@
                     <a href="{{ route('about') }}">Sobre nosotros</a>
                     <a href="{{ route('blog.index') }}">Blog</a>
                     <a href="{{ route('contact') }}">Contacto</a>
+                    <a href="{{ route('privacy') }}">Política de privacidad</a>
                 </div>
                 <div class="col-6 col-md-5">
                     <h6>Contáctanos</h6>
                     <ul class="list-unstyled footer-contact mb-0">
                         <li>
                             <i class="bi bi-geo-alt-fill"></i>
-                            <span>Av. Los Rescatados 1234, San Martín de Porres, Lima</span>
+                            <span>San Martín de Porres, Lima, Perú</span>
                         </li>
                         <li>
                             <i class="bi bi-telephone-fill"></i>

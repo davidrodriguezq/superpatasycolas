@@ -36,7 +36,10 @@
                         <ul class="list-unstyled mb-4" style="line-height:2.2;">
                             <li class="d-flex gap-3 align-items-start">
                                 <i class="bi bi-geo-alt-fill spyc-text-naranja mt-1 flex-shrink-0"></i>
-                                <span class="text-muted small">Av. Los Rescatados 1234, San Martín de Porres, Lima, Perú</span>
+                                <div class="text-muted small">
+                                    <span>San Martín de Porres, Lima, Perú</span><br>
+                                    <span class="fst-italic" style="font-size:.78rem;">Por seguridad de nuestros animales, la dirección exacta se comparte al coordinar una visita.</span>
+                                </div>
                             </li>
                             <li class="d-flex gap-3 align-items-start">
                                 <i class="bi bi-telephone-fill spyc-text-naranja mt-1 flex-shrink-0"></i>

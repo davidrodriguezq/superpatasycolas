@@ -32,7 +32,9 @@ class DashboardController extends Controller
 
         $pendingAdoptionRequests = AdoptionRequest::pending()->count();
 
-        $pendingCessionRequests = CessionRequest::pending()->count();
+        // DESACTIVADO: Módulo de cesión deshabilitado — métrica comentada.
+        // $pendingCessionRequests = CessionRequest::pending()->count();
+        $pendingCessionRequests = 0;
 
         $totalUsers = User::count();
 
@@ -92,10 +94,9 @@ class DashboardController extends Controller
             ->limit(5)
             ->get();
 
-        $recentCessionRequests = CessionRequest::with(['user'])
-            ->recent()
-            ->limit(5)
-            ->get();
+        // DESACTIVADO: Módulo de cesión deshabilitado — tabla de últimas cesiones comentada.
+        // $recentCessionRequests = CessionRequest::with(['user'])->recent()->limit(5)->get();
+        $recentCessionRequests = collect();
 
         return view('admin.dashboard', compact(
             'totalAnimals',

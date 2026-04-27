@@ -28,7 +28,7 @@ class RegisteredUserController extends Controller
             'address'  => $request->address,
         ]);
 
-        $user->assignRole($request->role_type);
+        $user->assignRole('adopter');
 
         event(new Registered($user));
 

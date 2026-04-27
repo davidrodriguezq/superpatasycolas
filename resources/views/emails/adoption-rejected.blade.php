@@ -67,7 +67,7 @@
                     </tr>
                     <tr>
                         <td style="background:#343A40; color:#aea598; padding:16px 28px; font-size:.78rem; text-align:center;">
-                            Av. Los Rescatados 1234, San Martín de Porres, Lima · +51 999 000 000
+                            San Martín de Porres, Lima, Perú · +51 999 000 000
                         </td>
                     </tr>
                 </table>

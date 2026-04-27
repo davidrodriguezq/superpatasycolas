@@ -713,6 +713,13 @@ a:hover { color: var(--spyc-naranja-hover); }
 }
 .spyc-password-reqs i { color: var(--spyc-dorado); margin-right: 6px; }
 
+/* Enlace naranja dentro de formularios (ej. política de privacidad en registro) */
+.spyc-link {
+    color: var(--spyc-naranja);
+    font-weight: 600;
+}
+.spyc-link:hover { color: var(--spyc-naranja-hover); }
+
 /* Mobile tweaks para vistas de auth */
 @media (max-width: 480px) {
     .spyc-auth-wrap { padding: 24px 16px; }
