@@ -36,14 +36,14 @@ Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
 Route::get('/politica-de-privacidad', [PageController::class, 'privacy'])->name('privacy');
 
 // Fase 1: perfil de usuario — F1-T06
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/perfil', [ProfileController::class, 'show'])->name('profile.show');
     Route::get('/perfil/editar', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/perfil', [ProfileController::class, 'update'])->name('profile.update');
 });
 
 // Fase 2: solicitudes de adopción — F2-T02, F2-T08
-Route::middleware(['auth', 'role:adopter'])->group(function () {
+Route::middleware(['auth', 'verified', 'role:adopter'])->group(function () {
     Route::get('/adopcion/{animal}/solicitar', [AdoptionController::class, 'create'])->name('adoption.create');
     Route::post('/adopcion/{animal}/solicitar', [AdoptionController::class, 'store'])->name('adoption.store');
     Route::get('/mis-solicitudes', [AdoptionController::class, 'myRequests'])->name('adoption.my-requests');

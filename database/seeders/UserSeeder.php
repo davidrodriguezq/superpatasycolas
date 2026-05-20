@@ -74,8 +74,9 @@ class UserSeeder extends Seeder
             unset($data['role']);
 
             $user = User::create(array_merge($data, [
-                'password'  => Hash::make('password'),
-                'is_active' => true,
+                'password'          => Hash::make('password'),
+                'is_active'         => true,
+                'email_verified_at' => now(),
             ]));
 
             $user->assignRole($role);

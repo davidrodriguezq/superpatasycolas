@@ -3,43 +3,44 @@
 @section('title', 'Verificar correo — Super Patas y Colas')
 
 @section('content')
-<div class="container py-5">
-    <div class="row justify-content-center">
-        <div class="col-sm-10 col-md-7 col-lg-5">
-            <div class="card border-0 shadow-sm rounded-4">
-                <div class="card-body p-4 p-md-5 text-center">
+<section class="spyc-auth-wrap">
+    <div class="container">
+        <div class="spyc-auth-card">
 
-                    <img src="{{ asset('images/logo.png') }}" alt="Super Patas y Colas" height="56" class="mb-3">
-                    <h4 class="fw-bold mb-2">Verifica tu correo</h4>
-                    <p class="text-muted">
-                        Gracias por registrarte. Antes de continuar, haz clic en el enlace de verificación
-                        que enviamos a tu correo electrónico.
-                    </p>
-
-                    @if (session('status') == 'verification-link-sent')
-                        <div class="alert alert-success">
-                            Se ha enviado un nuevo enlace de verificación a tu correo.
-                        </div>
-                    @endif
-
-                    <div class="d-grid gap-2 mt-4">
-                        <form method="POST" action="{{ route('verification.send') }}">
-                            @csrf
-                            <button type="submit" class="btn btn-primary w-100">
-                                Reenviar correo de verificación
-                            </button>
-                        </form>
-
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            <button type="submit" class="btn btn-outline-secondary w-100">
-                                Cerrar sesión
-                            </button>
-                        </form>
-                    </div>
-                </div>
+            <div class="text-center mb-3">
+                <i class="bi bi-envelope-check" style="font-size:48px; color:var(--spyc-orange, #f97316);"></i>
             </div>
+
+            <h4 class="spyc-auth-title">Verifica tu correo electrónico</h4>
+            <p class="spyc-auth-subtitle">
+                Te hemos enviado un enlace de verificación a tu correo electrónico.
+                Revisa tu bandeja de entrada (y la carpeta de spam) y haz clic en el enlace para activar tu cuenta.
+            </p>
+
+            @if (session('status') === 'verification-link-sent')
+                <div class="alert alert-success py-2 mb-3" role="alert">
+                    <i class="bi bi-check-circle me-1"></i>
+                    Se ha enviado un nuevo enlace de verificación a tu correo.
+                </div>
+            @endif
+
+            <form method="POST" action="{{ route('verification.send') }}">
+                @csrf
+                <button type="submit" class="btn btn-outline-primary w-100 mb-3">
+                    <i class="bi bi-send me-1"></i> Reenviar enlace de verificación
+                </button>
+            </form>
+
+            <div class="spyc-auth-sep">o</div>
+
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit" class="btn btn-outline-secondary btn-sm w-100">
+                    Cerrar sesión
+                </button>
+            </form>
+
         </div>
     </div>
-</div>
+</section>
 @endsection
