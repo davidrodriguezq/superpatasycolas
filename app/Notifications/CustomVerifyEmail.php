@@ -7,15 +7,15 @@ use Illuminate\Notifications\Messages\MailMessage;
 
 class CustomVerifyEmail extends VerifyEmail
 {
-    protected function buildMailMessage($url): MailMessage
+    public function toMail($notifiable): MailMessage
     {
+        $verificationUrl = $this->verificationUrl($notifiable);
+
         return (new MailMessage)
             ->subject('Verifica tu correo — Super Patas y Colas')
-            ->greeting('¡Hola!')
-            ->line('Gracias por registrarte en Super Patas y Colas. Para activar tu cuenta, haz clic en el siguiente botón:')
-            ->action('Verificar correo electrónico', $url)
-            ->line('Este enlace expirará en 60 minutos.')
-            ->line('Si no creaste una cuenta en nuestro sitio, puedes ignorar este mensaje.')
-            ->salutation('— Equipo Super Patas y Colas');
+            ->view('emails.verify-email', [
+                'verificationUrl' => $verificationUrl,
+                'userName'        => $notifiable->name,
+            ]);
     }
 }
