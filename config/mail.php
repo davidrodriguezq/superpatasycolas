@@ -97,6 +97,15 @@ return [
             'retry_after' => 60,
         ],
 
+        'azure' => [
+            'transport'              => 'azure',
+            'resource_name'          => env('AZURE_MAIL_RESOURCE_NAME'),
+            'endpoint'               => env('AZURE_MAIL_ENDPOINT'),
+            'access_key'             => env('AZURE_MAIL_KEY'),
+            'api_version'            => env('AZURE_MAIL_API_VERSION', '2023-03-31'),
+            'disable_user_tracking'  => env('AZURE_MAIL_DISABLE_TRACKING', false),
+        ],
+
     ],
 
     /*
