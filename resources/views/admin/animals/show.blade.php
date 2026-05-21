@@ -28,6 +28,9 @@
         <a href="{{ route('admin.animals.edit', $animal) }}" class="btn btn-primary btn-sm">
             <i class="bi bi-pencil me-1"></i> Editar
         </a>
+        <a href="{{ route('admin.reports.animal-medical', $animal) }}" class="btn btn-outline-danger btn-sm" target="_blank">
+            <i class="bi bi-file-earmark-pdf me-1"></i> Exportar ficha médica
+        </a>
         <a href="{{ route('admin.animals.index') }}" class="btn btn-outline-secondary btn-sm">
             <i class="bi bi-arrow-left me-1"></i> Volver al listado
         </a>

@@ -3,6 +3,12 @@
 @section('title', 'Dashboard')
 @section('page-title', 'Dashboard')
 
+@section('page-actions')
+    <a href="{{ route('admin.reports.statistics') }}" class="btn btn-outline-danger" target="_blank">
+        <i class="bi bi-file-earmark-pdf me-1"></i> Exportar estadísticas
+    </a>
+@endsection
+
 @section('breadcrumb')
     Panel admin / Dashboard
 @endsection

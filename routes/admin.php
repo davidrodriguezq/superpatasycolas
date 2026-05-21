@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\CessionRequestController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\FollowupController;
 use App\Http\Controllers\Admin\MedicalRecordController;
+use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -56,3 +57,8 @@ Route::get('adoption-requests/{adoptionRequest}/followups/create', [FollowupCont
 Route::post('adoption-requests/{adoptionRequest}/followups', [FollowupController::class, 'store'])->name('followups.store');
 Route::get('followups/{followup}', [FollowupController::class, 'show'])->name('followups.show');
 Route::delete('followups/{followup}', [FollowupController::class, 'destroy'])->name('followups.destroy');
+
+// Fase 4: reportes PDF — F4-T23
+Route::get('reports/animal/{animal}/medical', [ReportController::class, 'animalMedicalReport'])->name('reports.animal-medical');
+Route::get('reports/statistics', [ReportController::class, 'shelterStatistics'])->name('reports.statistics');
+Route::get('reports/animals-list', [ReportController::class, 'animalsList'])->name('reports.animals-list');
