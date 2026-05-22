@@ -10,8 +10,11 @@ use App\Http\Requests\Admin\StoreAnimalRequest;
 use App\Http\Requests\Admin\UpdateAnimalRequest;
 use App\Models\Animal;
 use App\Models\AnimalPhoto;
+use App\Models\User;
+use App\Notifications\AnimalStatusChanged;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
@@ -92,7 +95,8 @@ class AnimalController extends Controller
 
     public function update(UpdateAnimalRequest $request, Animal $animal): RedirectResponse
     {
-        $newStatus = AnimalStatus::from($request->input('status'));
+        $newStatus  = AnimalStatus::from($request->input('status'));
+        $oldStatus  = $animal->status;
 
         if (! $animal->canTransitionTo($newStatus)) {
             return back()
@@ -103,6 +107,11 @@ class AnimalController extends Controller
         $animal->update($request->safe()->except(['photos']));
 
         $this->uploadPhotos($animal, $request->file('photos', []));
+
+        if ($oldStatus !== $newStatus && in_array($newStatus, [AnimalStatus::Adopted, AnimalStatus::Deceased], true)) {
+            $admins = User::role(['admin', 'collaborator'])->get();
+            Notification::send($admins, new AnimalStatusChanged($animal, $newStatus->value));
+        }
 
         return redirect()
             ->route('admin.animals.show', $animal)

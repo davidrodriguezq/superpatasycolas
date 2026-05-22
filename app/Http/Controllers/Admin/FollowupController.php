@@ -7,8 +7,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreFollowupRequest;
 use App\Models\AdoptionRequest;
 use App\Models\PostAdoptionFollowup;
+use App\Models\User;
+use App\Notifications\CriticalFollowup;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
@@ -79,6 +82,12 @@ class FollowupController extends Controller
                 $path = Storage::disk('public')->putFile('followups', $photo);
                 $followup->photos()->create(['path' => $path]);
             }
+        }
+
+        if ($followup->is_critical) {
+            $followup->load(['adoptionRequest.animal', 'adoptionRequest.user']);
+            $admins = User::role(['admin', 'collaborator'])->get();
+            Notification::send($admins, new CriticalFollowup($followup));
         }
 
         return redirect()

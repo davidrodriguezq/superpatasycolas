@@ -83,6 +83,17 @@
                 <i class="bi bi-newspaper"></i> Blog
             </a>
 
+            @php $sidebarUnread = auth()->user()->unreadNotifications()->count(); @endphp
+            <a href="{{ route('admin.notifications.index') }}"
+               class="admin-nav-item {{ request()->routeIs('admin.notifications.*') ? 'active' : '' }}">
+                <i class="bi bi-bell"></i> Notificaciones
+                @if($sidebarUnread > 0)
+                    <span class="badge rounded-pill bg-danger ms-auto" style="font-size: .68rem;">
+                        {{ $sidebarUnread > 99 ? '99+' : $sidebarUnread }}
+                    </span>
+                @endif
+            </a>
+
             @role('admin')
                 <div class="admin-nav-group-label">Administración</div>
                 <a href="{{ route('admin.users.index') }}"
@@ -106,10 +117,23 @@
             </button>
             <div class="spacer"></div>
 
-            <button class="topbar-btn" aria-label="Notificaciones">
+            @php $unreadCount = auth()->user()->unreadNotifications()->count(); @endphp
+            <a href="{{ route('admin.notifications.index') }}"
+               class="topbar-btn position-relative text-decoration-none"
+               aria-label="Notificaciones">
                 <i class="bi bi-bell"></i>
-                <span class="dot-badge"></span>
-            </button>
+                @if($unreadCount > 0)
+                    <span id="notification-badge"
+                          class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                          style="font-size: 10px; min-width: 18px;">
+                        {{ $unreadCount > 99 ? '99+' : $unreadCount }}
+                    </span>
+                @else
+                    <span id="notification-badge"
+                          class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                          style="font-size: 10px; min-width: 18px; display: none;">0</span>
+                @endif
+            </a>
 
             <div class="dropdown">
                 <button class="user-chip" data-bs-toggle="dropdown" aria-expanded="false">
@@ -160,6 +184,25 @@
             const close = () => { sb.classList.remove('open'); bd.classList.remove('show'); };
             tg.addEventListener('click', open);
             bd.addEventListener('click', close);
+        })();
+
+        (function () {
+            function updateNotificationBadge() {
+                fetch('{{ route("admin.notifications.unread-count") }}')
+                    .then(function (r) { return r.json(); })
+                    .then(function (data) {
+                        var badge = document.getElementById('notification-badge');
+                        if (!badge) return;
+                        if (data.count > 0) {
+                            badge.textContent = data.count > 99 ? '99+' : data.count;
+                            badge.style.display = 'inline-block';
+                        } else {
+                            badge.style.display = 'none';
+                        }
+                    })
+                    .catch(function () {});
+            }
+            setInterval(updateNotificationBadge, 60000);
         })();
     </script>
     @stack('scripts')

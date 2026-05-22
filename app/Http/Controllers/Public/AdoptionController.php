@@ -8,7 +8,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Public\StoreAdoptionRequest;
 use App\Models\AdoptionRequest;
 use App\Models\Animal;
+use App\Models\User;
+use App\Notifications\NewAdoptionRequest;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\View\View;
 
 class AdoptionController extends Controller
@@ -56,6 +59,9 @@ class AdoptionController extends Controller
         ]);
 
         $animal->update(['status' => AnimalStatus::InProcess]);
+
+        $admins = User::role(['admin', 'collaborator'])->get();
+        Notification::send($admins, new NewAdoptionRequest($adoptionRequest->load(['user', 'animal'])));
 
         return redirect()
             ->route('adoption.my-requests')

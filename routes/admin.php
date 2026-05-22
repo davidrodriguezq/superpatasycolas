@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\CessionRequestController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\FollowupController;
 use App\Http\Controllers\Admin\MedicalRecordController;
+use App\Http\Controllers\Admin\NotificationController;
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
@@ -62,3 +63,9 @@ Route::delete('followups/{followup}', [FollowupController::class, 'destroy'])->n
 Route::get('reports/animal/{animal}/medical', [ReportController::class, 'animalMedicalReport'])->name('reports.animal-medical');
 Route::get('reports/statistics', [ReportController::class, 'shelterStatistics'])->name('reports.statistics');
 Route::get('reports/animals-list', [ReportController::class, 'animalsList'])->name('reports.animals-list');
+
+// Fase 4: notificaciones internas — F4-T24
+Route::get('notifications/unread-count', [NotificationController::class, 'unreadCount'])->name('notifications.unread-count');
+Route::get('notifications', [NotificationController::class, 'index'])->name('notifications.index');
+Route::patch('notifications/{notification}/read', [NotificationController::class, 'markAsRead'])->name('notifications.mark-read');
+Route::post('notifications/mark-all-read', [NotificationController::class, 'markAllAsRead'])->name('notifications.mark-all-read');

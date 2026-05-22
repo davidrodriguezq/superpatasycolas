@@ -8,10 +8,13 @@ use App\Http\Controllers\Controller;
 use App\Mail\AdoptionApproved;
 use App\Mail\AdoptionRejected;
 use App\Models\AdoptionRequest;
+use App\Models\User;
+use App\Notifications\AnimalStatusChanged;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\View\View;
 
 class AdoptionRequestController extends Controller
@@ -82,6 +85,12 @@ class AdoptionRequestController extends Controller
             Mail::to($adoptionRequest->user->email)
                 ->send(new AdoptionApproved($adoptionRequest->fresh(['user', 'animal'])));
         }
+
+        $admins = User::role(['admin', 'collaborator'])->get();
+        Notification::send($admins, new AnimalStatusChanged(
+            $adoptionRequest->animal,
+            AnimalStatus::Adopted->value
+        ));
 
         return redirect()
             ->route('admin.adoption-requests.show', $adoptionRequest)
