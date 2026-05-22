@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Setting;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -21,6 +22,13 @@ class AppServiceProvider extends ServiceProvider
     {
         if ($this->app->environment('production')) {
             \Illuminate\Support\Facades\URL::forceScheme('https');
+        }
+
+        try {
+            $settings = Setting::pluck('value', 'key')->toArray();
+            view()->share('settings', $settings);
+        } catch (\Exception $e) {
+            view()->share('settings', []);
         }
     }
 }

@@ -52,7 +52,7 @@
                     De conformidad con la Ley N° 29733, Ley de Protección de Datos Personales del Perú, usted tiene
                     derecho a acceder, rectificar, cancelar y oponerse al tratamiento de sus datos personales. Para
                     ejercer estos derechos, puede contactarnos a través del correo
-                    <a href="mailto:contacto@superpatasycolas.pe">contacto@superpatasycolas.pe</a>.
+                    <a href="mailto:{{ $settings['shelter_email'] ?? 'contacto@superpatasycolas.pe' }}">{{ $settings['shelter_email'] ?? 'contacto@superpatasycolas.pe' }}</a>.
                 </p>
 
                 <h5 class="fw-bold mb-2" style="color:#2a2622;">6. Seguridad</h5>

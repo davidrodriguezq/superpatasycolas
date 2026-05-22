@@ -29,7 +29,7 @@
 <body>
 
     <div class="header">
-        <h1>Super Patas y Colas &mdash; Listado de animales</h1>
+        <h1>{{ $settings['shelter_name'] ?? 'Super Patas y Colas' }} &mdash; Listado de animales</h1>
         @if (!empty($appliedFilters))
             @php
                 $filterLabels = [];
@@ -118,8 +118,8 @@
     @endif
 
     <div class="footer">
-        <p>Documento generado por el sistema Super Patas y Colas &mdash; {{ now()->format('d/m/Y H:i') }}</p>
-        <p>Albergue Super Patas y Colas &middot; San Martín de Porres, Lima, Perú</p>
+        <p>Documento generado por el sistema {{ $settings['shelter_name'] ?? 'Super Patas y Colas' }} &mdash; {{ now()->format('d/m/Y H:i') }}</p>
+        <p>Albergue {{ $settings['shelter_name'] ?? 'Super Patas y Colas' }} &middot; {{ ($settings['shelter_district'] ?? 'San Martín de Porres') . ', ' . ($settings['shelter_city'] ?? 'Lima, Perú') }}</p>
     </div>
 
 </body>

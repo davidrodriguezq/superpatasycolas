@@ -25,8 +25,8 @@
     <nav class="navbar navbar-expand-lg bg-white pub-nav">
         <div class="container">
             <a class="navbar-brand pub-brand" href="{{ url('/') }}">
-                <img src="{{ asset('images/logo.png') }}" alt="Super Patas y Colas" height="40" class="pub-brand-mark">
-                <span class="pub-brand-text">Super Patas y Colas<span>Albergue · SMP, Lima</span></span>
+                <img src="{{ asset('images/logo.png') }}" alt="{{ $settings['shelter_name'] ?? 'Super Patas y Colas' }}" height="40" class="pub-brand-mark">
+                <span class="pub-brand-text">{{ $settings['shelter_name'] ?? 'Super Patas y Colas' }}<span>{{ $settings['shelter_slogan'] ?? 'Albergue · SMP, Lima' }}</span></span>
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -106,11 +106,10 @@
                     <div class="d-flex align-items-center mb-3">
                         <img src="{{ asset('images/logo.png') }}" alt="" height="36"
                              class="bg-white rounded-circle p-1">
-                        <span class="ms-2 fw-bold text-white">Super Patas y Colas</span>
+                        <span class="ms-2 fw-bold text-white">{{ $settings['shelter_name'] ?? 'Super Patas y Colas' }}</span>
                     </div>
                     <p class="footer-desc">
-                        Damos hogar a perros y gatos rescatados en San Martín de Porres desde 2019.
-                        Cada adopción responsable cambia dos vidas.
+                        {{ $settings['shelter_description'] ?? 'Damos hogar a perros y gatos rescatados en San Martín de Porres desde 2019. Cada adopción responsable cambia dos vidas.' }}
                     </p>
                 </div>
                 <div class="col-6 col-md-3">
@@ -127,25 +126,31 @@
                     <ul class="list-unstyled footer-contact mb-0">
                         <li>
                             <i class="bi bi-geo-alt-fill"></i>
-                            <span>San Martín de Porres, Lima, Perú</span>
+                            <span>{{ ($settings['shelter_district'] ?? 'San Martín de Porres') . ', ' . ($settings['shelter_city'] ?? 'Lima, Perú') }}</span>
                         </li>
+                        @if(!empty($settings['shelter_phone']))
                         <li>
                             <i class="bi bi-telephone-fill"></i>
-                            <span>+51 999 000 000</span>
+                            <span>{{ $settings['shelter_phone'] }}</span>
                         </li>
+                        @endif
+                        @if(!empty($settings['shelter_email']))
                         <li>
                             <i class="bi bi-envelope-fill"></i>
-                            <span>contacto@superpatasycolas.pe</span>
+                            <span>{{ $settings['shelter_email'] }}</span>
                         </li>
+                        @endif
+                        @if(!empty($settings['shelter_schedule']))
                         <li>
                             <i class="bi bi-clock-fill"></i>
-                            <span>Visitas: sáb y dom · 10:00 – 17:00</span>
+                            <span>{{ $settings['shelter_schedule'] }}</span>
                         </li>
+                        @endif
                     </ul>
                 </div>
             </div>
             <div class="pub-footer-bottom">
-                © {{ date('Y') }} Super Patas y Colas. Todos los derechos reservados.
+                © {{ date('Y') }} {{ $settings['shelter_name'] ?? 'Super Patas y Colas' }}. Todos los derechos reservados.
             </div>
         </div>
     </footer>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdoptionRequestController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\AnimalController;
 use App\Http\Controllers\Admin\BlogPostController;
 use App\Http\Controllers\Admin\CessionRequestController;
@@ -20,9 +21,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 // Fase 1: usuarios — F1-T05 (solo admin, no collaborator)
+// Fase 4: configuración del albergue — F4-T25 (solo admin)
 Route::middleware('role:admin')->group(function () {
     Route::resource('users', UserController::class)->except(['create', 'store', 'destroy']);
     Route::patch('users/{user}/toggle-status', [UserController::class, 'toggleStatus'])->name('users.toggle-status');
+
+    Route::get('settings', [SettingController::class, 'edit'])->name('settings.edit');
+    Route::put('settings', [SettingController::class, 'update'])->name('settings.update');
 });
 
 // Fase 1: animales — F1-T09 a F1-T14 (admin y collaborator)

@@ -14,9 +14,9 @@
                               overflow: hidden; box-shadow: 0 4px 16px rgba(40,30,20,.08);">
                     <tr>
                         <td style="background: #E8531E; padding: 22px 28px; color: #ffffff;">
-                            <h1 style="margin: 0; font-size: 1.3rem;">Super Patas y Colas</h1>
+                            <h1 style="margin: 0; font-size: 1.3rem;">{{ $settings['shelter_name'] ?? 'Super Patas y Colas' }}</h1>
                             <p style="margin: 4px 0 0; font-size: .85rem; letter-spacing: .08em; text-transform: uppercase; opacity: .9;">
-                                Albergue de animales · SMP, Lima
+                                {{ $settings['shelter_slogan'] ?? 'Albergue de animales · SMP, Lima' }}
                             </p>
                         </td>
                     </tr>
@@ -56,7 +56,7 @@
                     </tr>
                     <tr>
                         <td style="background: #343A40; color: #aea598; padding: 16px 28px; font-size: .78rem; text-align: center;">
-                            © 2026 Super Patas y Colas · San Martín de Porres, Lima, Perú
+                            © {{ date('Y') }} {{ $settings['shelter_name'] ?? 'Super Patas y Colas' }} · {{ ($settings['shelter_district'] ?? 'San Martín de Porres') . ', ' . ($settings['shelter_city'] ?? 'Lima, Perú') }}
                         </td>
                     </tr>
                 </table>

@@ -11,12 +11,14 @@
 @section('page-title', 'Gestión de animales')
 
 @section('page-actions')
-    <a href="{{ route('admin.animals.create') }}" class="btn btn-primary btn-sm">
-        <i class="bi bi-plus-circle me-1"></i> Registrar animal
-    </a>
-    <a href="{{ route('admin.reports.animals-list', request()->query()) }}" class="btn btn-outline-danger btn-sm" target="_blank">
-        <i class="bi bi-file-earmark-pdf me-1"></i> Exportar PDF
-    </a>
+    <div class="d-flex gap-2 flex-wrap">
+        <a href="{{ route('admin.animals.create') }}" class="btn btn-primary btn-sm">
+            <i class="bi bi-plus-circle me-1"></i> Registrar animal
+        </a>
+        <a href="{{ route('admin.reports.animals-list', request()->query()) }}" class="btn btn-outline-danger btn-sm" target="_blank">
+            <i class="bi bi-file-earmark-pdf me-1"></i> Exportar PDF
+        </a>
+    </div>
 @endsection
 
 @section('content')

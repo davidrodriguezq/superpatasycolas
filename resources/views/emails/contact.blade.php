@@ -7,7 +7,7 @@
 <body style="font-family: Arial, sans-serif; color: #343A40; background: #f9f9f9; padding: 24px;">
     <div style="max-width: 560px; margin: 0 auto; background: #fff; border-radius: 10px; padding: 32px; border: 1px solid #e7e3de;">
         <div style="margin-bottom: 24px; border-bottom: 3px solid #E8531E; padding-bottom: 16px;">
-            <span style="font-weight: 700; font-size: 1.1rem; color: #E8531E;">Super Patas y Colas</span>
+            <span style="font-weight: 700; font-size: 1.1rem; color: #E8531E;">{{ $settings['shelter_name'] ?? 'Super Patas y Colas' }}</span>
             <p style="margin: 4px 0 0; font-size: .85rem; color: #8a7f72;">Nuevo mensaje desde el formulario de contacto web</p>
         </div>
 

@@ -13,9 +13,9 @@
                               box-shadow:0 4px 16px rgba(40,30,20,.08);">
                     <tr>
                         <td style="background:#E8531E; padding: 22px 28px; color:#ffffff;">
-                            <h1 style="margin:0; font-size:1.3rem;">Super Patas y Colas</h1>
+                            <h1 style="margin:0; font-size:1.3rem;">{{ $settings['shelter_name'] ?? 'Super Patas y Colas' }}</h1>
                             <p style="margin:4px 0 0; font-size:.85rem; letter-spacing:.08em; text-transform:uppercase; opacity:.9;">
-                                Albergue · SMP, Lima
+                                {{ $settings['shelter_slogan'] ?? 'Albergue · SMP, Lima' }}
                             </p>
                         </td>
                     </tr>
@@ -61,13 +61,13 @@
 
                             <p style="margin:24px 0 0; line-height:1.55;">
                                 Gracias nuevamente por tu interés.<br>
-                                <strong>Equipo Super Patas y Colas</strong>
+                                <strong>Equipo {{ $settings['shelter_name'] ?? 'Super Patas y Colas' }}</strong>
                             </p>
                         </td>
                     </tr>
                     <tr>
                         <td style="background:#343A40; color:#aea598; padding:16px 28px; font-size:.78rem; text-align:center;">
-                            San Martín de Porres, Lima, Perú · +51 999 000 000
+                            {{ ($settings['shelter_district'] ?? 'San Martín de Porres') . ', ' . ($settings['shelter_city'] ?? 'Lima, Perú') }}{{ !empty($settings['shelter_phone']) ? ' · ' . $settings['shelter_phone'] : '' }}
                         </td>
                     </tr>
                 </table>

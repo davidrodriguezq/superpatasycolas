@@ -101,8 +101,8 @@
                     <i class="bi bi-people"></i> Usuarios
                 </a>
                 <div class="admin-sidebar-sep"></div>
-                <a href="{{ url('/admin/configuracion') }}"
-                   class="admin-nav-item {{ request()->routeIs('admin.settings') ? 'active' : '' }}">
+                <a href="{{ route('admin.settings.edit') }}"
+                   class="admin-nav-item {{ request()->routeIs('admin.settings.*') ? 'active' : '' }}">
                     <i class="bi bi-gear"></i> Configuración
                 </a>
             @endrole

@@ -37,43 +37,59 @@
                             <li class="d-flex gap-3 align-items-start">
                                 <i class="bi bi-geo-alt-fill spyc-text-naranja mt-1 flex-shrink-0"></i>
                                 <div class="text-muted small">
-                                    <span>San Martín de Porres, Lima, Perú</span><br>
-                                    <span class="fst-italic" style="font-size:.78rem;">Por seguridad de nuestros animales, la dirección exacta se comparte al coordinar una visita.</span>
+                                    <span>{{ ($settings['shelter_district'] ?? 'San Martín de Porres') . ', ' . ($settings['shelter_city'] ?? 'Lima, Perú') }}</span><br>
+                                    @if(!empty($settings['shelter_privacy_note']))
+                                        <span class="fst-italic" style="font-size:.78rem;">{{ $settings['shelter_privacy_note'] }}</span>
+                                    @endif
                                 </div>
                             </li>
+                            @if(!empty($settings['shelter_phone']))
                             <li class="d-flex gap-3 align-items-start">
                                 <i class="bi bi-telephone-fill spyc-text-naranja mt-1 flex-shrink-0"></i>
-                                <span class="text-muted small">+51 999 000 000</span>
+                                <span class="text-muted small">{{ $settings['shelter_phone'] }}</span>
                             </li>
+                            @endif
+                            @if(!empty($settings['shelter_email']))
                             <li class="d-flex gap-3 align-items-start">
                                 <i class="bi bi-envelope-fill spyc-text-naranja mt-1 flex-shrink-0"></i>
-                                <span class="text-muted small">contacto@superpatasycolas.pe</span>
+                                <span class="text-muted small">{{ $settings['shelter_email'] }}</span>
                             </li>
+                            @endif
+                            @if(!empty($settings['shelter_schedule']))
                             <li class="d-flex gap-3 align-items-start">
                                 <i class="bi bi-clock-fill spyc-text-naranja mt-1 flex-shrink-0"></i>
-                                <span class="text-muted small">Visitas: sáb y dom · 10:00 – 17:00</span>
+                                <span class="text-muted small">{{ $settings['shelter_schedule'] }}</span>
                             </li>
+                            @endif
                         </ul>
 
                         <hr style="border-color:#f0e8de;">
 
+                        @if(!empty($settings['shelter_facebook']) || !empty($settings['shelter_instagram']))
                         <div class="mt-3">
                             <p class="small text-muted mb-2">Síguenos en redes sociales</p>
                             <div class="d-flex gap-2">
-                                <a href="{{ url('#') }}"
+                                @if(!empty($settings['shelter_facebook']))
+                                <a href="{{ $settings['shelter_facebook'] }}"
                                    class="spyc-social-btn"
+                                   target="_blank" rel="noopener noreferrer"
                                    title="Facebook"
                                    aria-label="Facebook">
                                     <i class="bi bi-facebook"></i>
                                 </a>
-                                <a href="{{ url('#') }}"
+                                @endif
+                                @if(!empty($settings['shelter_instagram']))
+                                <a href="{{ $settings['shelter_instagram'] }}"
                                    class="spyc-social-btn"
+                                   target="_blank" rel="noopener noreferrer"
                                    title="Instagram"
                                    aria-label="Instagram">
                                     <i class="bi bi-instagram"></i>
                                 </a>
+                                @endif
                             </div>
                         </div>
+                        @endif
                     </div>
                 </div>
             </div>

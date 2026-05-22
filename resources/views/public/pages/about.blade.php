@@ -9,9 +9,9 @@
 <section class="spyc-bg-rosa py-4 py-md-5">
     <div class="container text-center">
         <h1 class="fw-bold mb-2" style="color:#2a2622; font-size:clamp(1.4rem,4vw,2rem);">
-            Sobre Super Patas y Colas
+            Sobre {{ $settings['shelter_name'] ?? 'Super Patas y Colas' }}
         </h1>
-        <p class="text-muted mb-0">Albergue de animales en San Martín de Porres, Lima</p>
+        <p class="text-muted mb-0">Albergue de animales en {{ $settings['shelter_district'] ?? 'San Martín de Porres' }}, {{ $settings['shelter_city'] ?? 'Lima, Perú' }}</p>
     </div>
 </section>
 
@@ -29,14 +29,7 @@
             <div class="col-md-7">
                 <h2 class="fw-bold mb-3" style="color:#2a2622;">Nuestra historia</h2>
                 <p class="text-muted" style="line-height:1.7;">
-                    Super Patas y Colas nace en 2019 con la misión de brindar refugio temporal y cuidado a
-                    perros y gatos en situación de abandono en San Martín de Porres, Lima. Desde entonces,
-                    hemos rescatado y dado en adopción a decenas de animales, gracias al compromiso de
-                    nuestros voluntarios y la comunidad.
-                </p>
-                <p class="text-muted" style="line-height:1.7;">
-                    Creemos que cada animal merece una segunda oportunidad y que cada adopción responsable
-                    transforma vidas. Nuestro trabajo no sería posible sin el apoyo de personas como tú.
+                    {{ $settings['shelter_history'] ?? 'Super Patas y Colas nace en 2019 con la misión de brindar refugio temporal y cuidado a perros y gatos en situación de abandono en San Martín de Porres, Lima. Desde entonces, hemos rescatado y dado en adopción a decenas de animales, gracias al compromiso de nuestros voluntarios y la comunidad.' }}
                 </p>
                 <a href="{{ route('catalog.index') }}" class="btn btn-primary mt-2">
                     <i class="bi bi-search-heart me-2"></i>Ver mascotas disponibles
@@ -63,9 +56,7 @@
                             <h4 class="fw-bold mb-0" style="color:#2a2622;">Misión</h4>
                         </div>
                         <p class="text-muted mb-0" style="line-height:1.7;">
-                            Rescatar, rehabilitar y dar en adopción responsable a perros y gatos en situación
-                            de abandono, promoviendo una cultura de respeto hacia los animales en la comunidad
-                            de San Martín de Porres y Lima Metropolitana.
+                            {{ $settings['shelter_mission'] ?? 'Rescatar, rehabilitar y dar en adopción responsable a perros y gatos en situación de abandono, promoviendo una cultura de respeto hacia los animales en la comunidad.' }}
                         </p>
                     </div>
                 </div>
@@ -80,9 +71,7 @@
                             <h4 class="fw-bold mb-0" style="color:#2a2622;">Visión</h4>
                         </div>
                         <p class="text-muted mb-0" style="line-height:1.7;">
-                            Ser el albergue de referencia en San Martín de Porres, reconocido por su gestión
-                            transparente, su impacto positivo en la reducción del abandono animal y su red de
-                            adoptantes responsables.
+                            {{ $settings['shelter_vision'] ?? 'Ser el albergue de referencia en San Martín de Porres, reconocido por su gestión transparente y su impacto positivo en la reducción del abandono animal.' }}
                         </p>
                     </div>
                 </div>
@@ -142,22 +131,28 @@
                             <li class="d-flex gap-3">
                                 <i class="bi bi-geo-alt-fill spyc-text-naranja flex-shrink-0 mt-1"></i>
                                 <span>
-                                    Nos ubicamos en el distrito de San Martín de Porres, Lima.
-                                    Para conocer nuestra ubicación exacta, contáctanos por correo o teléfono y coordinaremos una visita.
+                                    Nos ubicamos en el distrito de {{ $settings['shelter_district'] ?? 'San Martín de Porres' }}, {{ $settings['shelter_city'] ?? 'Lima, Perú' }}.
+                                    {{ $settings['shelter_privacy_note'] ?? 'Para conocer nuestra ubicación exacta, contáctanos por correo o teléfono y coordinaremos una visita.' }}
                                 </span>
                             </li>
+                            @if(!empty($settings['shelter_phone']))
                             <li class="d-flex gap-3">
                                 <i class="bi bi-telephone-fill spyc-text-naranja flex-shrink-0 mt-1"></i>
-                                <span>+51 999 000 000</span>
+                                <span>{{ $settings['shelter_phone'] }}</span>
                             </li>
+                            @endif
+                            @if(!empty($settings['shelter_email']))
                             <li class="d-flex gap-3">
                                 <i class="bi bi-envelope-fill spyc-text-naranja flex-shrink-0 mt-1"></i>
-                                <span>contacto@superpatasycolas.pe</span>
+                                <span>{{ $settings['shelter_email'] }}</span>
                             </li>
+                            @endif
+                            @if(!empty($settings['shelter_schedule']))
                             <li class="d-flex gap-3">
                                 <i class="bi bi-clock-fill spyc-text-naranja flex-shrink-0 mt-1"></i>
-                                <span>Visitas: sábados y domingos · 10:00 – 17:00</span>
+                                <span>{{ $settings['shelter_schedule'] }}</span>
                             </li>
+                            @endif
                         </ul>
                         <div class="mt-3">
                             <a href="{{ route('contact') }}" class="btn btn-primary btn-sm">

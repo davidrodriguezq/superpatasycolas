@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\AdoptionRequest;
 use App\Models\Animal;
 use App\Models\PostAdoptionFollowup;
+use App\Models\Setting;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
@@ -23,7 +24,8 @@ class ReportController extends Controller
             'cedente',
         ]);
 
-        $pdf = Pdf::loadView('admin.reports.animal-medical', compact('animal'));
+        $settings = Setting::pluck('value', 'key')->toArray();
+        $pdf = Pdf::loadView('admin.reports.animal-medical', compact('animal', 'settings'));
 
         $filename = 'ficha-medica-' . \Illuminate\Support\Str::slug($animal->name) . '-' . now()->format('Y-m-d') . '.pdf';
 
@@ -96,7 +98,10 @@ class ReportController extends Controller
 
         $adoptionsMonthTotal = array_sum(array_column($adoptionsByMonth, 'count'));
 
+        $settings = Setting::pluck('value', 'key')->toArray();
+
         $pdf = Pdf::loadView('admin.reports.shelter-statistics', compact(
+            'settings',
             'totalAnimals',
             'availableAnimals',
             'totalAdoptions',
@@ -153,7 +158,8 @@ class ReportController extends Controller
             'search'     => $request->search,
         ]);
 
-        $pdf = Pdf::loadView('admin.reports.animals-list', compact('animals', 'appliedFilters'))
+        $settings = Setting::pluck('value', 'key')->toArray();
+        $pdf = Pdf::loadView('admin.reports.animals-list', compact('animals', 'appliedFilters', 'settings'))
             ->setPaper('a4', 'landscape');
 
         $filename = 'listado-animales-' . now()->format('Y-m-d') . '.pdf';
