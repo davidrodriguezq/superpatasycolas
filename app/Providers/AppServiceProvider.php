@@ -21,11 +21,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Paginator::useBootstrapFive();
+
         if ($this->app->environment('production')) {
             \Illuminate\Support\Facades\URL::forceScheme('https');
         }
-        
-        Paginator::useBootstrapFive();
 
         try {
             $settings = Setting::pluck('value', 'key')->toArray();
