@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Setting;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +24,8 @@ class AppServiceProvider extends ServiceProvider
         if ($this->app->environment('production')) {
             \Illuminate\Support\Facades\URL::forceScheme('https');
         }
+        
+        Paginator::useBootstrapFive();
 
         try {
             $settings = Setting::pluck('value', 'key')->toArray();
