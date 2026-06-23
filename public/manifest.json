@@ -1,0 +1,42 @@
+{
+    "name": "Super Patas y Colas",
+    "short_name": "SPyC",
+    "description": "Sistema del albergue Super Patas y Colas. Adopta perros y gatos rescatados en San Martín de Porres, Lima.",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#FCEAE0",
+    "theme_color": "#E8531E",
+    "orientation": "portrait-primary",
+    "scope": "/",
+    "lang": "es",
+    "categories": ["lifestyle", "social"],
+    "icons": [
+        {
+            "src": "/icons/icon-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/icons/icon-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "screenshots": [],
+    "shortcuts": [
+        {
+            "name": "Catálogo de mascotas",
+            "short_name": "Catálogo",
+            "url": "/catalogo",
+            "icons": []
+        },
+        {
+            "name": "Contacto",
+            "short_name": "Contacto",
+            "url": "/contacto",
+            "icons": []
+        }
+    ]
+}

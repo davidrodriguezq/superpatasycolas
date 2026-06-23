@@ -35,6 +35,9 @@ Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
 
 Route::get('/politica-de-privacidad', [PageController::class, 'privacy'])->name('privacy');
 
+// PWA — página offline (F4-T26)
+Route::get('/offline', fn () => view('public.pages.offline'))->name('offline');
+
 // Fase 1: perfil de usuario — F1-T06
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/perfil', [ProfileController::class, 'show'])->name('profile.show');

@@ -18,6 +18,14 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
+    {{-- PWA --}}
+    <link rel="manifest" href="{{ asset('manifest.json') }}">
+    <meta name="theme-color" content="#E8531E">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Super Patas y Colas">
+    <link rel="apple-touch-icon" href="{{ asset('icons/icon-192x192.png') }}">
+
     @stack('styles')
 </head>
 <body class="d-flex flex-column min-vh-100">
@@ -155,7 +163,80 @@
         </div>
     </footer>
 
+    {{-- PWA Install Banner --}}
+    <div id="pwa-install-banner" style="display: none; position: fixed; bottom: 0; left: 0; right: 0; background-color: #E8531E; color: #fff; padding: 12px 20px; z-index: 9999; box-shadow: 0 -2px 8px rgba(0,0,0,0.2);">
+        <div class="d-flex align-items-center justify-content-between" style="max-width: 800px; margin: 0 auto;">
+            <div class="d-flex align-items-center gap-3">
+                <i class="bi bi-download fs-4"></i>
+                <div>
+                    <strong>Instalar Super Patas y Colas</strong>
+                    <div style="font-size: 13px; opacity: 0.9;">Accede más rápido desde tu pantalla de inicio</div>
+                </div>
+            </div>
+            <div class="d-flex gap-2">
+                <button id="pwa-install-btn" class="btn btn-light btn-sm" style="color: #E8531E; font-weight: bold;">
+                    Instalar
+                </button>
+                <button id="pwa-dismiss-btn" class="btn btn-outline-light btn-sm">
+                    Ahora no
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     @stack('scripts')
+
+    {{-- PWA: Service Worker y banner de instalación --}}
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then((registration) => {
+                        console.log('SW registrado:', registration.scope);
+                    })
+                    .catch((error) => {
+                        console.log('SW error:', error);
+                    });
+            });
+        }
+
+        let deferredPrompt;
+        const installBanner = document.getElementById('pwa-install-banner');
+        const installBtn = document.getElementById('pwa-install-btn');
+        const dismissBtn = document.getElementById('pwa-dismiss-btn');
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            if (!sessionStorage.getItem('pwa-dismissed')) {
+                installBanner.style.display = 'block';
+            }
+        });
+
+        if (installBtn) {
+            installBtn.addEventListener('click', () => {
+                if (deferredPrompt) {
+                    deferredPrompt.prompt();
+                    deferredPrompt.userChoice.then(() => {
+                        deferredPrompt = null;
+                        installBanner.style.display = 'none';
+                    });
+                }
+            });
+        }
+
+        if (dismissBtn) {
+            dismissBtn.addEventListener('click', () => {
+                installBanner.style.display = 'none';
+                sessionStorage.setItem('pwa-dismissed', 'true');
+            });
+        }
+
+        window.addEventListener('appinstalled', () => {
+            installBanner.style.display = 'none';
+            deferredPrompt = null;
+        });
+    </script>
 </body>
 </html>
