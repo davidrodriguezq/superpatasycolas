@@ -35,7 +35,7 @@
     </div>
     <div class="collapse" id="filterPanel">
         <div class="card-body px-4 pb-4 pt-2">
-            <form method="GET" action="{{ route('admin.followups.index') }}" class="row g-3">
+            <form method="GET" action="{{ route('admin.followups.index') }}" class="row g-3" data-auto-search>
                 <div class="col-md-3">
                     <label class="form-label small fw-semibold">Estado del animal</label>
                     <select name="animal_condition" class="form-select form-select-sm">
@@ -63,7 +63,7 @@
                 <div class="col-md-4">
                     <label class="form-label small fw-semibold">Buscar</label>
                     <input type="text" name="search" class="form-control form-control-sm"
-                           placeholder="Nombre del animal o adoptante..."
+                           placeholder="Escribe nombre del animal o adoptante..."
                            value="{{ request('search') }}">
                 </div>
                 <div class="col-md-2 d-flex align-items-end gap-2">

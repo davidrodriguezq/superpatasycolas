@@ -213,6 +213,7 @@
             setInterval(updateNotificationBadge, 60000);
         })();
     </script>
+    <script src="{{ asset('js/auto-search.js') }}"></script>
     @stack('scripts')
 
     {{-- PWA: Service Worker --}}

@@ -21,7 +21,7 @@
         {{-- Filtros --}}
         <div class="card border-0 shadow-sm mb-4" style="border-radius:12px;">
             <div class="card-body p-3">
-                <form method="GET" action="{{ route('catalog.index') }}" class="row g-2 align-items-end">
+                <form method="GET" action="{{ route('catalog.index') }}" class="row g-2 align-items-end" data-auto-search>
                     <div class="col-6 col-sm-4 col-md-auto">
                         <label class="form-label small fw-semibold text-muted mb-1">Especie</label>
                         <select name="species" class="form-select form-select-sm" style="min-width:120px;">
@@ -44,7 +44,7 @@
                                name="search"
                                value="{{ request('search') }}"
                                class="form-control form-control-sm"
-                               placeholder="Buscar por nombre o raza...">
+                               placeholder="Escribe para buscar por nombre o raza...">
                     </div>
                     <div class="col-auto">
                         <button type="submit" class="btn btn-primary btn-sm px-3">

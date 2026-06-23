@@ -28,7 +28,7 @@
     </div>
     <div class="collapse {{ request()->hasAny(['role','status','search']) ? 'show' : '' }}" id="filterCollapse">
         <div class="card-body pt-0 pb-3 px-4">
-            <form method="GET" action="{{ route('admin.users.index') }}">
+            <form method="GET" action="{{ route('admin.users.index') }}" data-auto-search>
                 <div class="row g-3 align-items-end">
                     <div class="col-sm-6 col-md-3">
                         <label class="form-label small fw-semibold text-muted">Rol</label>
@@ -51,7 +51,7 @@
                     <div class="col-sm-8 col-md-4">
                         <label class="form-label small fw-semibold text-muted">Buscar</label>
                         <input type="text" name="search" class="form-control form-control-sm"
-                               placeholder="Nombre o correo electrónico..."
+                               placeholder="Escribe para buscar por nombre o email..."
                                value="{{ request('search') }}">
                     </div>
                     <div class="col-sm-4 col-md-2 d-flex gap-2">
