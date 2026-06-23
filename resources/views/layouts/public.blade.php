@@ -109,8 +109,8 @@
 
     <footer class="pub-footer mt-auto">
         <div class="container">
-            <div class="row g-4 justify-content-between">
-                <div class="col-12 col-md-4 col-lg-4">
+            <div class="row gy-4 gx-5">
+                <div class="col-12 col-md-4 col-lg-3">
                     <div class="d-flex align-items-center mb-3">
                         <img src="{{ asset('images/logo.png') }}" alt="" height="36"
                              class="bg-white rounded-circle p-1">
@@ -120,7 +120,7 @@
                         {{ $settings['shelter_description'] ?? 'Damos hogar a perros y gatos rescatados en San Martín de Porres desde 2019. Cada adopción responsable cambia dos vidas.' }}
                     </p>
                 </div>
-                <div class="col-12 col-md-4 col-lg-4">
+                <div class="col-12 col-md-4 col-lg-3">
                     <h6>Enlaces rápidos</h6>
                     <a href="{{ route('home') }}">Inicio</a>
                     <a href="{{ route('catalog.index') }}">Catálogo</a>
@@ -129,7 +129,7 @@
                     <a href="{{ route('contact') }}">Contacto</a>
                     <a href="{{ route('privacy') }}">Política de privacidad</a>
                 </div>
-                <div class="col-12 col-md-4 col-lg-4">
+                <div class="col-12 col-md-4 col-lg-3">
                     <h6>Contáctanos</h6>
                     <ul class="list-unstyled footer-contact mb-0">
                         <li>

@@ -114,6 +114,11 @@
                     <i class="bi bi-gear"></i> Configuración
                 </a>
             @endrole
+
+            <div class="admin-sidebar-sep"></div>
+            <a href="#" id="sidebar-install-pwa" class="admin-nav-item" style="display: none;">
+                <i class="bi bi-download"></i> Instalar app
+            </a>
         </nav>
     </aside>
     <div class="admin-sidebar-backdrop" id="adminBackdrop"></div>
@@ -229,6 +234,42 @@
                     });
             });
         }
+    </script>
+
+    {{-- PWA Install desde sidebar --}}
+    <script>
+        (function() {
+            var deferredPrompt;
+            var sidebarInstallBtn = document.getElementById('sidebar-install-pwa');
+
+            window.addEventListener('beforeinstallprompt', function(e) {
+                e.preventDefault();
+                deferredPrompt = e;
+                if (sidebarInstallBtn) {
+                    sidebarInstallBtn.style.display = '';
+                }
+            });
+
+            if (sidebarInstallBtn) {
+                sidebarInstallBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    if (deferredPrompt) {
+                        deferredPrompt.prompt();
+                        deferredPrompt.userChoice.then(function() {
+                            deferredPrompt = null;
+                            sidebarInstallBtn.style.display = 'none';
+                        });
+                    }
+                });
+            }
+
+            window.addEventListener('appinstalled', function() {
+                if (sidebarInstallBtn) {
+                    sidebarInstallBtn.style.display = 'none';
+                }
+                deferredPrompt = null;
+            });
+        })();
     </script>
 </body>
 </html>
