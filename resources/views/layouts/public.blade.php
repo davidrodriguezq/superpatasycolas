@@ -109,8 +109,8 @@
 
     <footer class="pub-footer mt-auto">
         <div class="container">
-            <div class="row gy-4 gx-5">
-                <div class="col-12 col-md-4 col-lg-3">
+            <div class="row gy-4">
+                <div class="col-12 col-md-4 col-lg-4">
                     <div class="d-flex align-items-center mb-3">
                         <img src="{{ asset('images/logo.png') }}" alt="" height="36"
                              class="bg-white rounded-circle p-1">
@@ -120,7 +120,7 @@
                         {{ $settings['shelter_description'] ?? 'Damos hogar a perros y gatos rescatados en San Martín de Porres desde 2019. Cada adopción responsable cambia dos vidas.' }}
                     </p>
                 </div>
-                <div class="col-12 col-md-4 col-lg-3">
+                <div class="col-12 col-md-4 col-lg-4">
                     <h6>Enlaces rápidos</h6>
                     <a href="{{ route('home') }}">Inicio</a>
                     <a href="{{ route('catalog.index') }}">Catálogo</a>
@@ -129,7 +129,7 @@
                     <a href="{{ route('contact') }}">Contacto</a>
                     <a href="{{ route('privacy') }}">Política de privacidad</a>
                 </div>
-                <div class="col-12 col-md-4 col-lg-3">
+                <div class="col-12 col-md-4 col-lg-4">
                     <h6>Contáctanos</h6>
                     <ul class="list-unstyled footer-contact mb-0">
                         <li>
@@ -163,32 +163,11 @@
         </div>
     </footer>
 
-    {{-- PWA Install Banner --}}
-    <div id="pwa-install-banner" style="display: none; position: fixed; bottom: 0; left: 0; right: 0; background-color: #E8531E; color: #fff; padding: 12px 20px; z-index: 9999; box-shadow: 0 -2px 8px rgba(0,0,0,0.2);">
-        <div class="d-flex align-items-center justify-content-between" style="max-width: 800px; margin: 0 auto;">
-            <div class="d-flex align-items-center gap-3">
-                <i class="bi bi-download fs-4"></i>
-                <div>
-                    <strong>Instalar Super Patas y Colas</strong>
-                    <div style="font-size: 13px; opacity: 0.9;">Accede más rápido desde tu pantalla de inicio</div>
-                </div>
-            </div>
-            <div class="d-flex gap-2">
-                <button id="pwa-install-btn" class="btn btn-light btn-sm" style="color: #E8531E; font-weight: bold;">
-                    Instalar
-                </button>
-                <button id="pwa-dismiss-btn" class="btn btn-outline-light btn-sm">
-                    Ahora no
-                </button>
-            </div>
-        </div>
-    </div>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('js/auto-search.js') }}"></script>
     @stack('scripts')
 
-    {{-- PWA: Service Worker y banner de instalación --}}
+    {{-- PWA: Service Worker --}}
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
@@ -201,43 +180,6 @@
                     });
             });
         }
-
-        let deferredPrompt;
-        const installBanner = document.getElementById('pwa-install-banner');
-        const installBtn = document.getElementById('pwa-install-btn');
-        const dismissBtn = document.getElementById('pwa-dismiss-btn');
-
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            if (!sessionStorage.getItem('pwa-dismissed')) {
-                installBanner.style.display = 'block';
-            }
-        });
-
-        if (installBtn) {
-            installBtn.addEventListener('click', () => {
-                if (deferredPrompt) {
-                    deferredPrompt.prompt();
-                    deferredPrompt.userChoice.then(() => {
-                        deferredPrompt = null;
-                        installBanner.style.display = 'none';
-                    });
-                }
-            });
-        }
-
-        if (dismissBtn) {
-            dismissBtn.addEventListener('click', () => {
-                installBanner.style.display = 'none';
-                sessionStorage.setItem('pwa-dismissed', 'true');
-            });
-        }
-
-        window.addEventListener('appinstalled', () => {
-            installBanner.style.display = 'none';
-            deferredPrompt = null;
-        });
     </script>
 </body>
 </html>

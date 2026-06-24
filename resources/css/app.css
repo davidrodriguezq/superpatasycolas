@@ -774,6 +774,24 @@ footer div {
     }
 }
 
+/* ---------- Paginación naranja ---------- */
+.pagination {
+    --bs-pagination-color: var(--spyc-naranja, #E8531E);
+    --bs-pagination-hover-color: #c8431a;
+    --bs-pagination-hover-bg: var(--spyc-rosa, #FCEAE0);
+    --bs-pagination-hover-border-color: var(--spyc-naranja, #E8531E);
+    --bs-pagination-focus-color: #c8431a;
+    --bs-pagination-focus-bg: var(--spyc-rosa, #FCEAE0);
+    --bs-pagination-focus-box-shadow: 0 0 0 0.25rem rgba(232, 83, 30, 0.25);
+    --bs-pagination-active-bg: var(--spyc-naranja, #E8531E);
+    --bs-pagination-active-border-color: var(--spyc-naranja, #E8531E);
+    --bs-pagination-active-color: #fff;
+}
+
+.page-link:focus {
+    box-shadow: 0 0 0 0.25rem rgba(232, 83, 30, 0.25) !important;
+}
+
 /* ============================================================
    Responsive — sidebar colapsable en móvil (< 992 px)
 ============================================================ */
