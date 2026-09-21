@@ -1,58 +1,127 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Super Patas y Colas
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+**Sistema web para la gestión de animales y procesos de adopción de un albergue**
 
-## About Laravel
+![PHP](https://img.shields.io/badge/PHP-8.3-777BB4?logo=php&logoColor=white)
+![Laravel](https://img.shields.io/badge/Laravel-MVC-FF2D20?logo=laravel&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-8.4-4479A1?logo=mysql&logoColor=white)
+![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3-7952B3?logo=bootstrap&logoColor=white)
+![Azure](https://img.shields.io/badge/Azure-App%20Service-0078D4?logo=microsoftazure&logoColor=white)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Acerca del proyecto
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Super Patas y Colas es una aplicación web desarrollada para el albergue del mismo nombre, ubicado en San Martín de Porres (Lima, Perú). El sistema reemplaza el manejo disperso de la información del albergue por una plataforma única que permite:
 
-## Learning Laravel
+- Registrar y administrar los animales rescatados, con fotografías e historial clínico.
+- Gestionar solicitudes de adopción mediante un flujo de aprobación con notificaciones por correo.
+- Realizar el seguimiento post-adopción, con alertas cuando se detectan condiciones críticas.
+- Mostrar un catálogo público de mascotas disponibles que incrementa la visibilidad del albergue.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Funcionalidades
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+**Portal público**
+- Página de inicio con animales destacados y estadísticas del albergue.
+- Catálogo con filtros por especie, sexo y búsqueda por nombre o raza.
+- Ficha de detalle con galería de fotografías y acceso directo a la solicitud de adopción.
+- Sección "Sobre nosotros", formulario de contacto, blog de noticias y política de privacidad.
+- Diseño responsivo, verificado desde 360 px de ancho.
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+**Panel administrativo**
+- Gestión de usuarios y roles (administrador y colaborador).
+- CRUD de animales con múltiples fotografías, historial clínico y transiciones de estado validadas.
+- Gestión de solicitudes de adopción con código de seguimiento (`SPC-YYYYMMDD-XXXX`), aprobación o rechazo y actualización automática del estado del animal.
+- Seguimiento post-adopción con evidencia fotográfica y alertas por estado crítico.
+- Dashboard con indicadores operativos y gráficas (Chart.js).
+- Reportes en PDF: ficha médica, estadísticas del albergue y listado de animales.
+- Editor del blog institucional.
 
-## Agentic Development
+**Seguridad y cuentas**
+- Autenticación con verificación de correo electrónico.
+- Control de acceso por roles (Spatie Laravel Permission).
+- Consentimiento de tratamiento de datos personales conforme a la Ley N.° 29733.
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+> El módulo de cesión de animales fue desarrollado, pero se encuentra desactivado por decisión del albergue, que solo realiza rescates. El código se conserva y únicamente se restringió su acceso.
 
-```bash
-composer require laravel/boost --dev
+## Tecnologías
 
-php artisan boost:install
+| Capa | Tecnologías |
+|---|---|
+| Frontend | Blade, Bootstrap 5, JavaScript Vanilla, Chart.js |
+| Backend | PHP 8.3, Laravel, Eloquent ORM, Laravel Breeze |
+| Base de datos | MySQL 8.4 |
+| Correo | Azure Communication Services |
+| Reportes | barryvdh/laravel-dompdf |
+| Despliegue | Azure App Service y Azure Database for MySQL, con CI/CD en GitHub Actions |
+| Pruebas | PHPUnit |
+
+## Arquitectura
+
+El proyecto sigue el patrón MVC de Laravel. Las validaciones se realizan en Form Requests, los estados de las entidades se modelan con PHP Enums y las rutas administrativas se agrupan bajo el prefijo `/admin` con control por rol.
+
+```
+app/
+├── Enums/              # Estados del dominio
+├── Http/
+│   ├── Controllers/    # Admin, Public y Auth
+│   └── Requests/       # Validaciones
+├── Mail/               # Correos transaccionales
+└── Models/             # Modelos Eloquent
+resources/views/        # admin, public, layouts, emails
+routes/                 # web.php y admin.php
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+## Instalación local
 
-## Contributing
+**Requisitos:** PHP 8.3, Composer y MySQL 8.x. En Windows se recomienda [Laragon](https://laragon.org/).
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+git clone https://github.com/<usuario>/superpatasycolas.git
+cd superpatasycolas
 
-## Code of Conduct
+composer install
+cp .env.example .env
+php artisan key:generate
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+# Crear la base de datos "superpatasycolas" (utf8mb4) y configurar DB_* en .env
 
-## Security Vulnerabilities
+php artisan migrate --seed
+php artisan storage:link
+php artisan serve
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Para evitar el envío real de correos en desarrollo, se recomienda `MAIL_MAILER=log`. Los mensajes, incluido el enlace de verificación de cuenta, se escriben en `storage/logs/laravel.log`.
 
-## License
+Los seeders crean usuarios de prueba (administrador, colaboradores y adoptantes), 10 animales y datos de ejemplo. Las credenciales se encuentran en `database/seeders/UserSeeder.php` y solo deben usarse en desarrollo.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Pruebas
+
+```bash
+php artisan test
+```
+
+## Despliegue
+
+El proyecto se despliega automáticamente en Azure App Service mediante GitHub Actions al hacer push a la rama `main`. La base de datos opera en Azure Database for MySQL Flexible Server con conexión SSL, y las variables de entorno de producción se configuran en el portal de Azure.
+
+## Estado del proyecto
+
+Los módulos funcionales se encuentran completos. Quedan pendientes la ampliación de pruebas automatizadas, la carga de datos reales del albergue en producción y la documentación de usuario.
+
+## Contexto académico
+
+Este proyecto fue desarrollado como trabajo del curso Capstone Project Sistemas (INVE1535), de la carrera de Ingeniería de Sistemas Computacionales de la Universidad Privada del Norte (UPN), período 2026-1, y responde a una necesidad real del albergue.
+
+<!-- Opcional: descomentar si se desea declarar el uso de IA.
+El desarrollo contó con el apoyo de herramientas de inteligencia artificial (Claude Code), cuyo uso quedó registrado en la bitácora del proyecto (`WORKLOG.md`).
+-->
+
+## Autor
+
+**Nombres y Apellidos**
+[LinkedIn](www.linkedin.com/in/david-alejandro-rodriguez-quiroga) · [GitHub]([https://github.com/davidrodriguezq])
+
+## Licencia
+
+Distribuido bajo la licencia MIT. Consulte el archivo [LICENSE](./LICENSE) para más información.
