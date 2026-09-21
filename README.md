@@ -120,7 +120,7 @@ El desarrollo contó con el apoyo de herramientas de inteligencia artificial (Cl
 ## Autor
 
 **David Alejandro Rodríguez Quiroga**
-[LinkedIn](www.linkedin.com/in/david-alejandro-rodriguez-quiroga) · [GitHub](https://github.com/davidrodriguezq)
+[LinkedIn]([www.linkedin.com/in/david-alejandro-rodriguez-quiroga](https://www.linkedin.com/in/david-alejandro-rodriguez-quiroga/)) · [GitHub](https://github.com/davidrodriguezq)
 
 ## Licencia
 
