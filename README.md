@@ -12,7 +12,7 @@
 
 ## Acerca del proyecto
 
-Super Patas y Colas es una aplicación web desarrollada para el albergue del mismo nombre, ubicado en San Martín de Porres (Lima, Perú). El sistema reemplaza el manejo disperso de la información del albergue por una plataforma única que permite:
+Super Patas y Colas es una aplicación web desarrollada para reemplazar el manejo disperso de la información del albergue por una plataforma única que permite:
 
 - Registrar y administrar los animales rescatados, con fotografías e historial clínico.
 - Gestionar solicitudes de adopción mediante un flujo de aprobación con notificaciones por correo.
