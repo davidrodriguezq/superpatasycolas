@@ -41,7 +41,7 @@ Este repositorio contiene una aplicación web desarrollada para reemplazar el ma
 - Control de acceso por roles (Spatie Laravel Permission).
 - Consentimiento de tratamiento de datos personales conforme a la Ley N.° 29733.
 
-> El módulo de cesión de animales fue desarrollado, pero se encuentra desactivado por decisión del albergue, que solo realiza rescates. El código se conserva y únicamente se restringió su acceso.
+> El módulo de cesión de animales fue desarrollado, pero se encuentra desactivado. El código se conserva y únicamente se restringió su acceso.
 
 ## Tecnologías
 
