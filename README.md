@@ -1,6 +1,5 @@
-# Super Patas y Colas
+# Sistema web para la gestión de animales y procesos de adopción de un albergue
 
-**Sistema web para la gestión de animales y procesos de adopción de un albergue**
 
 ![PHP](https://img.shields.io/badge/PHP-8.3-777BB4?logo=php&logoColor=white)
 ![Laravel](https://img.shields.io/badge/Laravel-MVC-FF2D20?logo=laravel&logoColor=white)
@@ -12,7 +11,7 @@
 
 ## Acerca del proyecto
 
-Super Patas y Colas es una aplicación web desarrollada para reemplazar el manejo disperso de la información del albergue por una plataforma única que permite:
+Este repositorio contiene una aplicación web desarrollada para reemplazar el manejo disperso de la información del albergue por una plataforma única que permite:
 
 - Registrar y administrar los animales rescatados, con fotografías e historial clínico.
 - Gestionar solicitudes de adopción mediante un flujo de aprobación con notificaciones por correo.
