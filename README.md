@@ -124,4 +124,4 @@ El desarrollo contó con el apoyo de herramientas de inteligencia artificial (Cl
 
 ## Licencia
 
-Distribuido bajo la licencia MIT. Consulte el archivo [LICENSE](./LICENSE) para más información.
+Distribuido bajo la licencia MIT. Consulte el archivo [LICENSE](./LICENSE.md) para más información.
